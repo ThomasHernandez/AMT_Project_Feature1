@@ -5,6 +5,7 @@
  */
 package amt.loginwebpages.web;
 
+import amt.loginwebpages.services.LoginManager;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -15,6 +16,7 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -97,6 +99,23 @@ public class ProtectedAccessFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
+        
+        
+        HttpServletRequest hsr = (HttpServletRequest) request;
+        String path = hsr.getRequestURI().substring(hsr.getContextPath().length());
+        
+        boolean isLoggedIn = true;
+        
+        LoginManager lm = new LoginManager();
+        
+
+        if (path.startsWith("/login")) {
+            isLoggedIn = false;
+        } else if (path.startsWith("/register")) {
+            isLoggedIn = false;
+        } else {
+            request.setAttribute("url", path);
+        }
         
         if (debug) {
             log("ProtectedAccessFilter:doFilter()");

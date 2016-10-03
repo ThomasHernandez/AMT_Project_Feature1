@@ -1,3 +1,11 @@
+<%-- 
+    Document   : registerform
+    Created on : 3 oct. 2016, 08:00:32
+    Author     : Thomas
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,7 +48,7 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="index.html#page-top">
+                <a class="navbar-brand page-scroll" href="index.html">
                     <i class="fa fa-play-circle"></i>  <span class="light">AMT - HOME
                 </a>
             </div>
@@ -53,10 +61,10 @@
                         <a href="index.html#page-top"></a>
                     </li>
 					<li>
-                        <a class="page-scroll" href="login.html">Login</a>
+                        <a class="page-scroll" href="login">Login</a>
                     </li>
 					<li>
-                        <a class="page-scroll" href="register.html">Register</a>
+                        <a class="page-scroll" href="register">Register</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="index.html#about">About</a>
@@ -77,25 +85,22 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-                        <h1 class="brand-heading">Login</h1>
-                        <p class="intro-text">Please enter your credentials to access the protected page</p>
-						<div class="row">
-						
+                        <h1 class="brand-heading">Registration</h1>
+                        <p class="intro-text">Here you can create a new user account</p>
 						<h2>
-							<form name="login" action="index_submit" method="post" accept-charset="utf-8">
-							 
-								<p class="text-left" ><label for="username">Email</label>
-								<input type="email" name="username" placeholder="yourname@email.com" required>
+							<form name="login" method="POST" action="register" accept-charset="utf-8">
+								<p class="text-left" ><label for="username">Username</label>
+								<input type="text" name="userName" id="inputUsername" class="form-control" placeholder="username" required>
 								<p class="text-left" ><label for="password">Password</label>
-								<input type="password" name="password" placeholder="password" required>
+								<input type="password" name="userPassword" id="inputPassword" class="form-control" placeholder="password" required>
+                                                                <p class="text-left" ><label for="password">Confirm Password</label>
+								<input type="password" name="confirm Password" id="inputPassword" class="form-control" placeholder="confirm password" required>
 								<p>
-								<input type="submit" value="Login">
+								<input class="btn btn-lg btn-success btn-block" type="submit" value="register">
+                                                                <!--<a href="login"><input type="submit" value="register"></a>-->
 							  
 							</form>
 						</h2>
-						
-						</div>
-						<p class="intro-text"><a href="register.html">Click here if you don't have an account yet!</a></p>
                     </div>
                 </div>
             </div>
@@ -130,3 +135,4 @@
 </body>
 
 </html>
+

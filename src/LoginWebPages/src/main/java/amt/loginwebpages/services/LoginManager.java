@@ -13,28 +13,27 @@ import amt.loginwebpages.model.UsersDatabase;
  */
 public class LoginManager {
     
-    private UsersDatabase users;
-
+    
     public LoginManager() {
-        this.users = new UsersDatabase();
+        
     }
     
     public boolean registerNewUser(String username, String password){
         
-        return users.addNewUser(username, password);
+        return UsersDatabase.addNewUser(username, password);
         
     }
 
     public boolean isUsernameRegistered(String username){
         
-        return users.isUsernameRegistered(username);
+        return UsersDatabase.isUsernameRegistered(username);
         
     }
     
     
     public boolean isUserValid(String username, String password){
         
-        return users.isValidCredentials(username, password);   
+        return UsersDatabase.isValidCredentials(username, password);   
         
     }
     
