@@ -30,7 +30,7 @@ import javax.ws.rs.core.Response;
  */
 
 @Stateless
-@Path("/user")
+@Path("/users")
 public class UserResource {
     
   @EJB
