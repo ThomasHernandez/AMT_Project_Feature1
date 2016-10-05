@@ -1,12 +1,11 @@
 <%-- 
-    Document   : loginform
-    Created on : 30 sept. 2016, 14:33:39
+    Document   : registerform
+    Created on : 3 oct. 2016, 08:00:32
     Author     : Thomas
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,10 +40,6 @@
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
-    
-    
-    
-    
 
     <!-- Navigation -->
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
@@ -90,30 +85,22 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-                        <h1 class="brand-heading">Login</h1>
-                        <p class="intro-text">Please enter your credentials to access the protected page</p>
-						<div class="row">
-						
+                        <h1 class="brand-heading">Registration</h1>
+                        <p class="intro-text">Here you can create a new user account</p>
 						<h2>
-							<form name="login" method="post" action="login" accept-charset="utf-8">
-                                                        <!--<form action="login">-->
+							<form name="login" method="POST" action="register" accept-charset="utf-8">
 								<p class="text-left" ><label for="username">Username</label>
 								<input type="text" name="userName" id="inputUsername" class="form-control" placeholder="username" required>
 								<p class="text-left" ><label for="password">Password</label>
 								<input type="password" name="userPassword" id="inputPassword" class="form-control" placeholder="password" required>
+                                                                <p class="text-left" ><label for="password">Confirm Password</label>
+								<input type="password" name="confirm Password" id="inputPassword" class="form-control" placeholder="confirm password" required>
 								<p>
-								<input class="btn btn-lg btn-success btn-block" type="submit" value="Login">
+								<input class="btn btn-lg btn-success btn-block" type="submit" value="register">
+                                                                <!--<a href="login"><input type="submit" value="register"></a>-->
 							  
 							</form>
-                                                        <!--<form action="login">
-                                                         User Name:<input type="text" name="userName"/><br/>
-                                                          Password:<input type="text" name="userPassword"/><br/>
-                                                          <input type="submit" value="submit"/>
-                                                        </form>-->
-                                                </h2>
-						
-						</div>
-						<p class="intro-text"><a href="register">Click here if you don't have an account yet!</a></p>
+						</h2>
                     </div>
                 </div>
             </div>
@@ -148,3 +135,4 @@
 </body>
 
 </html>
+

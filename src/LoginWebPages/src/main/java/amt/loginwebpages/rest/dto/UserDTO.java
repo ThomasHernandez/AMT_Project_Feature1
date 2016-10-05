@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package amt.loginwebpages.model;
+package amt.loginwebpages.rest.dto;
 
 /**
  *
- * @author Antony
+ * @author Thomas
  */
-public class User {
+public class UserDTO {
     
-    private final String username;
-    private final String password;
+    private String username;
+    private String password;
 
-    public User(String username, String password) {
+    public UserDTO(String username, String password) {
         this.username = username;
         this.password = password;
     }
@@ -27,10 +27,12 @@ public class User {
         return password;
     }
     
-    @Override
-    public String toString() {
-        return "User{" + "username=" + username + ", password=" + password + '}';
+    public void setUsername(String username) {
+        this.username = username;
     }
-    
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
     
 }

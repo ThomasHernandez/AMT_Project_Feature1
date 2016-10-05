@@ -5,21 +5,24 @@
  */
 package amt.loginwebpages.web;
 
-import amt.loginwebpages.model.User;
 import amt.loginwebpages.services.LoginManager;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Antony
+ * @author Thomas
  */
-public class LoginServlet extends HttpServlet {
+public class RegisterServlet extends HttpServlet {
 
-    LoginManager lm = new LoginManager();
+
+    
+        LoginManager lm = new LoginManager();
 
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -32,26 +35,26 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         if(request.getSession().getAttribute("username") != null){
             if(lm.isUsernameRegistered(request.getSession().getAttribute("username").toString())){
                 
                 request.getSession();
-                request.getRequestDispatcher("WEB-INF/pages/authorizedonly.html").forward(request, response);
                 
+                request.getRequestDispatcher("WEB-INF/pages/authorizedonly.html").forward(request, response);
+               
             }
             else{
-                request.getRequestDispatcher("WEB-INF/pages/loginform.jsp").forward(request, response);
+                request.getRequestDispatcher("WEB-INF/pages/registerform.jsp").forward(request, response);
                 
             }
             
         }
         else{
-             request.getRequestDispatcher("WEB-INF/pages/loginform.jsp").forward(request, response);
+             request.getRequestDispatcher("WEB-INF/pages/registerform.jsp").forward(request, response);
             
         }
-        
-        request.getRequestDispatcher("WEB-INF/pages/loginform.jsp").forward(request, response);
-       
+        request.getRequestDispatcher("WEB-INF/pages/registerform.jsp").forward(request, response);
    
     }
 
@@ -68,21 +71,18 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         
         
-        String username = request.getParameter("userName");
-        String password = request.getParameter("userPassword");
-        System.out.println("POST: " + username);
-        System.out.println("POST: " + password);
+        String newUserName = request.getParameter("userName");
+        String newPassword = request.getParameter("userPassword");
+        System.out.println("POST: " + newUserName);
+        System.out.println("POST: " + newPassword);
         
-        if(lm.isUserValid(username, password)){
+        if(lm.registerNewUser(newUserName, newPassword)){
             
-            request.getSession().setAttribute("username", username);
-            
-            
-            request.getRequestDispatcher("WEB-INF/pages/authorizedonly.html").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/pages/loginform.jsp").forward(request, response);
         }
         else{
             
-            request.getRequestDispatcher("WEB-INF/pages/loginform.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/pages/registerform.jsp").forward(request, response);
             
         }    
         

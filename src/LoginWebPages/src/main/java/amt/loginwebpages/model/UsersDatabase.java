@@ -13,19 +13,19 @@ import java.util.HashMap;
  */
 public class UsersDatabase {
     
-    private HashMap<String,String> users;
+    private static HashMap<String,String> USERS_INSTANCE = new HashMap<>();
 
-    public UsersDatabase() {
-        this.users = new HashMap<>();
-    }
-    
-    public boolean isUsernameRegistered(String username){
-        
-        return users.containsKey(username);
+    private UsersDatabase() {
         
     }
     
-    public boolean addNewUser(String username, String password){
+    public static boolean isUsernameRegistered(String username){
+        
+        return USERS_INSTANCE.containsKey(username);
+        
+    }
+    
+    public static boolean addNewUser(String username, String password){
         
         if(username.isEmpty() || password.isEmpty()){
             
@@ -35,7 +35,7 @@ public class UsersDatabase {
         
         if(!isUsernameRegistered(username)){
             
-            users.put(username, password);
+            USERS_INSTANCE.put(username, password);
             return true;
         }
         else{
@@ -46,11 +46,11 @@ public class UsersDatabase {
         
     }
     
-    public boolean isValidCredentials(String username, String password){
+    public static boolean isValidCredentials(String username, String password){
         
         if(isUsernameRegistered(username)){
             
-            return users.get(username).equals(password);
+            return USERS_INSTANCE.get(username).equals(password);
             
         }
         else{
@@ -58,8 +58,8 @@ public class UsersDatabase {
             return false;
         }
         
-        
     }
+
     
     
 }
