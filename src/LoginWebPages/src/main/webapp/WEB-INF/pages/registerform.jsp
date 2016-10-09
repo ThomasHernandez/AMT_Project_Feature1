@@ -89,6 +89,10 @@
                         <p class="intro-text">Here you can create a new user account</p>
 						<h2>
 							<form name="login" method="POST" action="register" accept-charset="utf-8">
+                                                                <p class="text-left" ><label for="firstName">FirstName</label>
+								<input type="text" name="firstName" id="inputFirstName" class="form-control" placeholder="firstName" required>
+                                                                <p class="text-left" ><label for="lastName">LastName</label>
+								<input type="text" name="LastName" id="inputLastName" class="form-control" placeholder="lastName" required>
 								<p class="text-left" ><label for="username">Username</label>
 								<input type="text" name="userName" id="inputUsername" class="form-control" placeholder="username" required>
 								<p class="text-left" ><label for="password">Password</label>

@@ -5,9 +5,12 @@
  */
 package amt.loginwebpages.web;
 
+import amt.loginwebpages.model.User;
 import amt.loginwebpages.services.LoginManager;
+import amt.loginwebpages.services.LoginManagerLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,10 +22,11 @@ import javax.servlet.http.HttpServletResponse;
  * @author Thomas
  */
 public class RegisterServlet extends HttpServlet {
-
-
     
-        LoginManager lm = new LoginManager();
+    @EJB
+    private LoginManagerLocal lm;
+
+      
 
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -36,7 +40,7 @@ public class RegisterServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        if(request.getSession().getAttribute("username") != null){
+        /*if(request.getSession().getAttribute("username") != null){
             if(lm.isUsernameRegistered(request.getSession().getAttribute("username").toString())){
                 
                 request.getSession();
@@ -53,7 +57,7 @@ public class RegisterServlet extends HttpServlet {
         else{
              request.getRequestDispatcher("WEB-INF/pages/registerform.jsp").forward(request, response);
             
-        }
+        }*/
         request.getRequestDispatcher("WEB-INF/pages/registerform.jsp").forward(request, response);
    
     }
@@ -70,20 +74,27 @@ public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        //LoginManager lm = (LoginManager) request.getAttribute("loginManager");
         
+        String newFirstName = request.getParameter("firstName");
+        String newLastName = request.getParameter("lastName");
         String newUserName = request.getParameter("userName");
         String newPassword = request.getParameter("userPassword");
-        System.out.println("POST: " + newUserName);
-        System.out.println("POST: " + newPassword);
+        String newPasswordConfirm = request.getParameter("userPasswordConfirm");
         
-        if(lm.registerNewUser(newUserName, newPassword)){
-            
+        /*if (!newPassword.equals(newPasswordConfirm)) {
+            request.getRequestDispatcher("WEB-INF/pages/registerform.jsp").forward(request, response);
+            return;
+        }*/
+        
+        User user = new User(newUserName, newPassword, newFirstName, newLastName);
+        
+        if(lm.addNewUser(user)){
+            //request.getSession().setAttribute("user", user);
             request.getRequestDispatcher("WEB-INF/pages/loginform.jsp").forward(request, response);
         }
         else{
-            
-            request.getRequestDispatcher("WEB-INF/pages/registerform.jsp").forward(request, response);
-            
+            request.getRequestDispatcher("WEB-INF/pages/registerform.jsp").forward(request, response);     
         }    
         
         

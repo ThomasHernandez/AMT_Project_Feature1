@@ -7,7 +7,9 @@ package amt.loginwebpages.web;
 
 import amt.loginwebpages.model.User;
 import amt.loginwebpages.services.LoginManager;
+import amt.loginwebpages.services.LoginManagerLocal;
 import java.io.IOException;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,8 +20,10 @@ import javax.servlet.http.HttpServletResponse;
  * @author Antony
  */
 public class LoginServlet extends HttpServlet {
+    
+    @EJB
+    private LoginManagerLocal lm;
 
-    LoginManager lm = new LoginManager();
 
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -32,7 +36,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if(request.getSession().getAttribute("username") != null){
+        /*if(request.getSession().getAttribute("username") != null){
             if(lm.isUsernameRegistered(request.getSession().getAttribute("username").toString())){
                 
                 request.getSession();
@@ -48,7 +52,7 @@ public class LoginServlet extends HttpServlet {
         else{
              request.getRequestDispatcher("WEB-INF/pages/loginform.jsp").forward(request, response);
             
-        }
+        }*/
         
         request.getRequestDispatcher("WEB-INF/pages/loginform.jsp").forward(request, response);
        
@@ -67,21 +71,20 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        //LoginManager lm = (LoginManager) request.getAttribute("loginManager");
+
         
         String username = request.getParameter("userName");
         String password = request.getParameter("userPassword");
-        System.out.println("POST: " + username);
-        System.out.println("POST: " + password);
+        User user = lm.loadUser(username);
         
-        if(lm.isUserValid(username, password)){
+        if(user != null && lm.isValidCredentials(user, password)){
             
-            request.getSession().setAttribute("username", username);
-            
-            
-            request.getRequestDispatcher("WEB-INF/pages/authorizedonly.html").forward(request, response);
+            request.getSession().setAttribute("user", user);
+            //response.sendRedirect(request.getServletContext().getContextPath() + "/");
+            request.getRequestDispatcher("/protected").forward(request, response);
         }
-        else{
-            
+        else{ 
             request.getRequestDispatcher("WEB-INF/pages/loginform.jsp").forward(request, response);
             
         }    

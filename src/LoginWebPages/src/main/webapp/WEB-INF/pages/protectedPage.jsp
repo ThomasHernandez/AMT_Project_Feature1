@@ -1,3 +1,11 @@
+<%-- 
+    Document   : protectedPage
+    Created on : 9 oct. 2016, 12:11:21
+    Author     : Thomas
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,12 +59,6 @@
                     <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
                     <li class="hidden">
                         <a href="index.html#page-top"></a>
-                    </li>
-					<li>
-                        <a class="page-scroll" href="login.html">Login</a>
-                    </li>
-					<li>
-                        <a class="page-scroll" href="register.html">Register</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="index.html#about">About</a>
@@ -114,3 +116,4 @@
 </body>
 
 </html>
+

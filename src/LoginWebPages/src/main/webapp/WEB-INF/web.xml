@@ -24,6 +24,14 @@
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>ProtectedServlet</servlet-name>
+        <servlet-class>amt.loginwebpages.web.ProtectedServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProtectedServlet</servlet-name>
+        <url-pattern>/protected</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

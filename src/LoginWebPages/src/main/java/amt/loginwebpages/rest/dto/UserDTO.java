@@ -11,31 +11,42 @@ package amt.loginwebpages.rest.dto;
  */
 public class UserDTO {
     
-    private String username;
-    private String password;
+    private String userName;
+    private String firstName;
+    private String lastName;
 
     public UserDTO() {
     }
 
-    public UserDTO(String username, String password) {
-        this.username = username;
-        this.password = password;
+    public UserDTO(String userName, String firstName, String lastName) {
+        this.userName = userName;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
+        return userName;
     }
     
+    public String getFirstname() {
+        return firstName;
+    }
+    
+    public String getLastname() {
+        return lastName;
+    }
+   
     public void setUsername(String username) {
-        this.username = username;
+        this.userName = username;
+    }
+    
+    public void setFirstname(String firstName) {
+        this.firstName = firstName;
+    }
+    
+    public void setLastname(String lastName) {
+        this.lastName = lastName;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
     
 }

@@ -30,8 +30,10 @@ public class ProtectedAccessFilter implements Filter {
     // this value is null, this filter instance is not currently
     // configured. 
     private FilterConfig filterConfig = null;
+    //private LoginManager lm = null;
     
     public ProtectedAccessFilter() {
+        //lm = new LoginManager();
     }    
     
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
@@ -99,23 +101,25 @@ public class ProtectedAccessFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
-        
+        //request.setAttribute("loginManager", lm);
         
         HttpServletRequest hsr = (HttpServletRequest) request;
         String path = hsr.getRequestURI().substring(hsr.getContextPath().length());
         
-        boolean isLoggedIn = true;
-        
-        LoginManager lm = new LoginManager();
-        
-
-        if (path.startsWith("/login")) {
-            isLoggedIn = false;
-        } else if (path.startsWith("/register")) {
-            isLoggedIn = false;
-        } else {
-            request.setAttribute("url", path);
+        if (hsr.getSession().getAttribute("user") != null) {
+            if (path.contentEquals("/login")) {
+                request.getRequestDispatcher("WEB-INF/pages/protectedPage.jsp").forward(request, response);
+            }
+            else {
+                chain.doFilter(request, response);
+            }
         }
+        else if (path.contentEquals("/protected")) {
+            request.getRequestDispatcher("/login").forward(request, response);
+        }
+        else {
+            chain.doFilter(request, response);
+}
         
         if (debug) {
             log("ProtectedAccessFilter:doFilter()");

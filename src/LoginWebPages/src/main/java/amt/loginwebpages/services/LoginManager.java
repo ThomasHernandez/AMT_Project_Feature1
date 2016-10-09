@@ -5,37 +5,69 @@
  */
 package amt.loginwebpages.services;
 
+import amt.loginwebpages.model.User;
 import amt.loginwebpages.model.UsersDatabase;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import javax.ejb.Singleton;
 
 /**
  *
  * @author Antony
  */
-public class LoginManager {
+@Singleton
+public class LoginManager implements LoginManagerLocal {
+    
+    private HashMap<String,User> users = new HashMap<>();
     
     
     public LoginManager() {
         
     }
     
-    public boolean registerNewUser(String username, String password){
+    public boolean isUsernameRegistered(User user){
         
-        return UsersDatabase.addNewUser(username, password);
-        
-    }
-
-    public boolean isUsernameRegistered(String username){
-        
-        return UsersDatabase.isUsernameRegistered(username);
+        return users.containsKey(user.getUsername());
         
     }
     
-    
-    public boolean isUserValid(String username, String password){
-        
-        return UsersDatabase.isValidCredentials(username, password);   
+    public boolean addNewUser(User user){
+              
+        if(!isUsernameRegistered(user)){
+            
+            users.put(user.getUsername(), user);
+            return true;
+        }
+        else{
+            
+            return false;
+            
+        }
         
     }
+    
+    public boolean isValidCredentials(User user, String testPassword){
+        
+        if(isUsernameRegistered(user)){
+            
+            return user.getPassword().equals(testPassword);
+            
+        }
+        else{
+            
+            return false;
+        }
+        
+    }
+  
+    public User loadUser(String userName) {
+        return users.get(userName);
+  }
+    
+    public List<User> findAllUsers() {
+        return new ArrayList(users.values());
+  }
     
     
     

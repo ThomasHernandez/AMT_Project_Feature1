@@ -16,9 +16,10 @@ import javax.ejb.Local;
 @Local
 public interface LoginManagerLocal {
     
-  public long saveUser(User user);
-  public User loadUser(long id);
-
-  public List<User> findAllUser();
+  public boolean isUsernameRegistered(User user);
+  public boolean addNewUser(User user);
+  public boolean isValidCredentials(User user, String testPassword);
+  public User loadUser(String userName);
+  public List<User> findAllUsers();
     
 }

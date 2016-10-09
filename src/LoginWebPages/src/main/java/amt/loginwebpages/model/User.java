@@ -11,25 +11,38 @@ package amt.loginwebpages.model;
  */
 public class User {
     
-    private final String username;
+    private final String userName;
     private final String password;
+    private final String firstName;
+    private final String lastName;
 
-    public User(String username, String password) {
-        this.username = username;
+    public User(String username, String password, String firstName, String lastName) {
+        this.userName = username;
         this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public String getUsername() {
-        return username;
+        return userName;
     }
 
     public String getPassword() {
         return password;
     }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
     
+
     @Override
     public String toString() {
-        return "User{" + "username=" + username + ", password=" + password + '}';
+        return "User{" + "username=" + userName + ", password=" + password + '}';
     }
     
     
