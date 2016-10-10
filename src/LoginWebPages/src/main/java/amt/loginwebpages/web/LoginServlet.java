@@ -72,6 +72,7 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         
         //LoginManager lm = (LoginManager) request.getAttribute("loginManager");
+        HttpServletResponse resp = (HttpServletResponse)response;
 
         
         String username = request.getParameter("userName");
@@ -82,7 +83,9 @@ public class LoginServlet extends HttpServlet {
             
             request.getSession().setAttribute("user", user);
             //response.sendRedirect(request.getServletContext().getContextPath() + "/");
-            request.getRequestDispatcher("/protected").forward(request, response);
+            //request.getRequestDispatcher("/protected").forward(request, response);
+            //request.getRequestDispatcher("WEB-INF/pages/protectedPage.jsp").forward(request, response);
+            resp.sendRedirect("/amt/protected");
         }
         else{ 
             request.getRequestDispatcher("WEB-INF/pages/loginform.jsp").forward(request, response);

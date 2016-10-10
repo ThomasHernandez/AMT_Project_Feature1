@@ -53,7 +53,7 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="index.html">
+                <a class="navbar-brand page-scroll" href="home">
                     <i class="fa fa-play-circle"></i>  <span class="light">AMT - HOME
                 </a>
             </div>
@@ -63,19 +63,23 @@
                 <ul class="nav navbar-nav">
                     <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
                     <li class="hidden">
-                        <a href="index.html#page-top"></a>
+                        <a href="home#page-top"></a>
                     </li>
-					<li>
+                    <c:if test="${sessionScope.user == null}">
+                        <li>
                         <a class="page-scroll" href="login">Login</a>
-                    </li>
-					<li>
+                        </li>
+                    </c:if>
+                    <c:if test="${sessionScope.user == null}">
+                        <li>
                         <a class="page-scroll" href="register">Register</a>
+                        </li>
+                    </c:if>
+                    <li>
+                        <a class="page-scroll" href="home#about">About</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="index.html#about">About</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="index.html#contact">Contact</a>
+                        <a class="page-scroll" href="home#contact">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -103,6 +107,7 @@
 								<input type="password" name="userPassword" id="inputPassword" class="form-control" placeholder="password" required>
 								<p>
 								<input class="btn btn-lg btn-success btn-block" type="submit" value="Login">
+                                                                
 							  
 							</form>
                                                         <!--<form action="login">

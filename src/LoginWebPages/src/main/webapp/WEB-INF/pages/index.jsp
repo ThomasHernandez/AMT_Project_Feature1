@@ -1,3 +1,11 @@
+<%-- 
+    Document   : index
+    Created on : 3 oct. 2016, 08:00:32
+    Author     : Thomas
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,10 +40,6 @@
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
-    
-    
-    
-    
 
     <!-- Navigation -->
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
@@ -44,7 +48,7 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="index.html#page-top">
+                <a class="navbar-brand page-scroll" href="home">
                     <i class="fa fa-play-circle"></i>  <span class="light">AMT - HOME
                 </a>
             </div>
@@ -54,19 +58,28 @@
                 <ul class="nav navbar-nav">
                     <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
                     <li class="hidden">
-                        <a href="index.html#page-top"></a>
+                        <a href="home"></a>
                     </li>
-					<li>
-                        <a class="page-scroll" href="login.html">Login</a>
-                    </li>
-					<li>
-                        <a class="page-scroll" href="register.html">Register</a>
+                    <c:if test="${sessionScope.user == null}">
+                        <li>
+                        <a class="page-scroll" href="login">Login</a>
+                        </li>
+                    </c:if>
+                    <c:if test="${sessionScope.user == null}">
+                        <li>
+                        <a class="page-scroll" href="register">Register</a>
+                        </li>
+                    </c:if>
+                    <c:if test="${sessionScope.user != null}">
+                        <li>
+                        <a class="page-scroll" href="protected">Protected</a>
+                        </li>
+                    </c:if>
+                    <li>
+                        <a class="page-scroll" href="home#about">About</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="index.html#about">About</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="index.html#contact">Contact</a>
+                        <a class="page-scroll" href="home#contact">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -81,32 +94,43 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-                        <h1 class="brand-heading">Login</h1>
-                        <p class="intro-text">Please enter your credentials to access the protected page</p>
-						<div class="row">
-						
-						<h2>
-							<form name="login" action="index_submit" method="post" accept-charset="utf-8">
-							 
-								<p class="text-left" ><label for="username">Email</label>
-								<input type="email" name="username" placeholder="yourname@email.com" required>
-								<p class="text-left" ><label for="password">Password</label>
-								<input type="password" name="password" placeholder="password" required>
-								<p>
-								<input type="submit" value="Login">
-							  
-							</form>
-						</h2>
-						
-						</div>
-						<p class="intro-text"><a href="register.html">Click here if you don't have an account yet!</a></p>
+                        <h1 class="brand-heading">Welcome to AMT course</h1>
+                        <p class="intro-text">Multi-tiered applications are fun!</p>
+                        <a href="#about" class="btn btn-circle page-scroll">
+                            <i class="fa fa-angle-double-down animated"></i>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </header>
-	
-  
+
+    <!-- About Section -->
+    <section id="about" class="container content-section text-center">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2>About AMT</h2>
+                <p> A course about Multi-tiered applications at HEIG-VD
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="container content-section text-center">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2>Contact Ciani Antony - Hernandez Thomas</h2>
+                <p>Feel free to email us to provide some feedback or to just say hello!</p>
+                <p><a href="mailto:antony.ciani@heig-vd.ch">antony.ciani@heig-vd.ch</a>
+                </p>
+                <p><a href="mailto:thomas.hernandez@heig-vd.ch">thomas.hernandez@heig-vd.ch</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <div id="map"></div>
 
     <!-- Footer -->
     <footer>

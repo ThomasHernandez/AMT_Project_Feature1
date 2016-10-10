@@ -48,7 +48,7 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="index.html">
+                <a class="navbar-brand page-scroll" href="home">
                     <i class="fa fa-play-circle"></i>  <span class="light">AMT - HOME
                 </a>
             </div>
@@ -58,19 +58,23 @@
                 <ul class="nav navbar-nav">
                     <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
                     <li class="hidden">
-                        <a href="index.html#page-top"></a>
+                        <a href="home#page-top"></a>
                     </li>
-					<li>
+                    <c:if test="${sessionScope.user == null}">
+                        <li>
                         <a class="page-scroll" href="login">Login</a>
-                    </li>
-					<li>
+                        </li>
+                    </c:if>
+                    <c:if test="${sessionScope.user == null}">
+                        <li>
                         <a class="page-scroll" href="register">Register</a>
+                        </li>
+                    </c:if>
+                    <li>
+                        <a class="page-scroll" href="home#about">About</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="index.html#about">About</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="index.html#contact">Contact</a>
+                        <a class="page-scroll" href="home#contact">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -92,13 +96,13 @@
                                                                 <p class="text-left" ><label for="firstName">FirstName</label>
 								<input type="text" name="firstName" id="inputFirstName" class="form-control" placeholder="firstName" required>
                                                                 <p class="text-left" ><label for="lastName">LastName</label>
-								<input type="text" name="LastName" id="inputLastName" class="form-control" placeholder="lastName" required>
+								<input type="text" name="lastName" id="inputLastName" class="form-control" placeholder="lastName" required>
 								<p class="text-left" ><label for="username">Username</label>
 								<input type="text" name="userName" id="inputUsername" class="form-control" placeholder="username" required>
 								<p class="text-left" ><label for="password">Password</label>
 								<input type="password" name="userPassword" id="inputPassword" class="form-control" placeholder="password" required>
                                                                 <p class="text-left" ><label for="password">Confirm Password</label>
-								<input type="password" name="confirm Password" id="inputPassword" class="form-control" placeholder="confirm password" required>
+								<input type="password" name="userPasswordConfirm" id="inputPassword" class="form-control" placeholder="confirm password" required>
 								<p>
 								<input class="btn btn-lg btn-success btn-block" type="submit" value="register">
                                                                 <!--<a href="login"><input type="submit" value="register"></a>-->

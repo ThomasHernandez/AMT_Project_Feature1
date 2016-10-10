@@ -48,24 +48,26 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="index.html#page-top">
+                <a class="navbar-brand page-scroll" href="home">
                     <i class="fa fa-play-circle"></i>  <span class="light">AMT - HOME
                 </a>
             </div>
+            
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
                 <ul class="nav navbar-nav">
                     <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
                     <li class="hidden">
-                        <a href="index.html#page-top"></a>
+                        <a href="home#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="index.html#about">About</a>
+                        <a class="page-scroll" href="home#about">About</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="index.html#contact">Contact</a>
+                        <a class="page-scroll" href="home#contact">Contact</a>
                     </li>
+                    <li><a class="page-scroll" href="logout">Logout</a></li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

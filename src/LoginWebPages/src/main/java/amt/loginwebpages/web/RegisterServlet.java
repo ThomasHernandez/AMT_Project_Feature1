@@ -75,27 +75,30 @@ public class RegisterServlet extends HttpServlet {
             throws ServletException, IOException {
         
         //LoginManager lm = (LoginManager) request.getAttribute("loginManager");
+        HttpServletResponse resp = (HttpServletResponse)response;
         
         String newFirstName = request.getParameter("firstName");
         String newLastName = request.getParameter("lastName");
         String newUserName = request.getParameter("userName");
         String newPassword = request.getParameter("userPassword");
         String newPasswordConfirm = request.getParameter("userPasswordConfirm");
-        
-        /*if (!newPassword.equals(newPasswordConfirm)) {
+
+        if (!newPassword.equals(newPasswordConfirm)) {
             request.getRequestDispatcher("WEB-INF/pages/registerform.jsp").forward(request, response);
             return;
-        }*/
-        
-        User user = new User(newUserName, newPassword, newFirstName, newLastName);
-        
-        if(lm.addNewUser(user)){
-            //request.getSession().setAttribute("user", user);
-            request.getRequestDispatcher("WEB-INF/pages/loginform.jsp").forward(request, response);
         }
-        else{
-            request.getRequestDispatcher("WEB-INF/pages/registerform.jsp").forward(request, response);     
-        }    
+            User user = new User(newUserName, newPassword, newFirstName, newLastName);
+
+            if (lm.addNewUser(user)) {
+                //request.getSession().setAttribute("user", user);
+                //request.getRequestDispatcher("WEB-INF/pages/loginform.jsp").forward(request, response);
+                resp.sendRedirect("/amt/login");
+            } else {
+                request.getRequestDispatcher("WEB-INF/pages/registerform.jsp").forward(request, response);
+            }
+        //}
+        
+            
         
         
     }
