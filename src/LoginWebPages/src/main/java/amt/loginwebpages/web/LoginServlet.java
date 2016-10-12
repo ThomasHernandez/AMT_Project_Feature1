@@ -36,23 +36,9 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        /*if(request.getSession().getAttribute("username") != null){
-            if(lm.isUsernameRegistered(request.getSession().getAttribute("username").toString())){
-                
-                request.getSession();
-                request.getRequestDispatcher("WEB-INF/pages/authorizedonly.html").forward(request, response);
-                
-            }
-            else{
-                request.getRequestDispatcher("WEB-INF/pages/loginform.jsp").forward(request, response);
-                
-            }
-            
-        }
-        else{
-             request.getRequestDispatcher("WEB-INF/pages/loginform.jsp").forward(request, response);
-            
-        }*/
+        //response.setContentType("text/html;charset=UTF-8");
+        //request.setAttribute("users", lm.findAllUsers());
+        //request.getRequestDispatcher("WEB-INF/pages/users.jsp").forward(request, response);
         
         request.getRequestDispatcher("WEB-INF/pages/loginform.jsp").forward(request, response);
        

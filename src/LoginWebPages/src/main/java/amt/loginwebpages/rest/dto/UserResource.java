@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -28,6 +29,11 @@ import javax.ws.rs.core.Response;
  *
  * @author Thomas
  */
+
+
+//ON A BESOIN D'UNE DTO POUR LE GET ET D'UNE AUTRE POUR LE POST!!
+//DONC UNE FOIS AVEC LE MDP DANS LE CONSTRUCTEUR (DANS POST) ET UNE FOIS SANS (GET)
+
 @Stateless
 @Path("/users")
 public class UserResource {
