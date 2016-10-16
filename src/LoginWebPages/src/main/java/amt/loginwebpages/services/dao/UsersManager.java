@@ -97,17 +97,17 @@ public class UsersManager implements UsersManagerLocal {
             
             if(!newPassword.isEmpty()){
                 PreparedStatement pstmt = connection.prepareStatement("UPDATE user SET user_password = \""+ newPassword  +"\" WHERE user_username = \"" + userNameToUpdate + "\"");
-                ResultSet rs = pstmt.executeQuery();
+                pstmt.executeUpdate();
             }
             
             if(!newFirstName.isEmpty()){
                 PreparedStatement pstmt = connection.prepareStatement("UPDATE user SET user_first_name = \""+ newFirstName +"\" WHERE user_username = \"" + userNameToUpdate + "\"");
-                ResultSet rs = pstmt.executeQuery();
+                pstmt.executeUpdate();
             }
             
             if(!newLastName.isEmpty()){
                 PreparedStatement pstmt = connection.prepareStatement("UPDATE user SET user_last_name = \""+ newLastName +"\" WHERE user_username = \"" + userNameToUpdate + "\"");
-                ResultSet rs = pstmt.executeQuery();
+                pstmt.executeUpdate();
                 
             }
            
@@ -126,10 +126,10 @@ public class UsersManager implements UsersManagerLocal {
         try {
             Connection connection = dataSource.getConnection();
             System.out.println("INSERT INTO user VALUES (NULL, \""+user.getUsername()+"\", \""+user.getPassword() +"\", "
-                                                                    + "\""+user.getFirstName() +"\", \""+user.getLastName() +"\", ");
+                                                                    + "\""+user.getFirstName() +"\", \""+user.getLastName() +"\") ");
             PreparedStatement pstmt = connection.prepareStatement("INSERT INTO user VALUES (NULL, \""+user.getUsername()+"\", \""+user.getPassword() +"\", "
-                                                                    + "\""+user.getFirstName() +"\", \""+user.getLastName() +"\", ");
-            ResultSet rs = pstmt.executeQuery();
+                                                                    + "\""+user.getFirstName() +"\", \""+user.getLastName() +"\")");
+            pstmt.executeUpdate();
             connection.close();
             return true;
             
@@ -148,17 +148,17 @@ public class UsersManager implements UsersManagerLocal {
             
             PreparedStatement pstmt = connection.prepareStatement("SELECT user_password FROM user WHERE user_username = \""+user.getUsername()+"\" ");
             ResultSet rs = pstmt.executeQuery();
-            connection.close();
+            
             if(rs.next()){
                 
                 if(rs.getString("user_password").equals(testPassword)){
-                    
+                    connection.close();
                     return true;
                     
                 }             
                 
             }
-            
+            connection.close();
             return false;
             
         } catch (SQLException ex) {
