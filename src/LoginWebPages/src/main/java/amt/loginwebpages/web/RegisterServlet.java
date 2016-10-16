@@ -6,13 +6,10 @@
 package amt.loginwebpages.web;
 
 import amt.loginwebpages.model.User;
-import amt.loginwebpages.services.LoginManager;
-import amt.loginwebpages.services.LoginManagerLocal;
+import amt.loginwebpages.services.dao.UsersManagerLocal;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 public class RegisterServlet extends HttpServlet {
     
     @EJB
-    private LoginManagerLocal lm;
+    private UsersManagerLocal um;
 
       
 
@@ -89,7 +86,7 @@ public class RegisterServlet extends HttpServlet {
         }
             User user = new User(newUserName, newPassword, newFirstName, newLastName);
 
-            if (lm.addNewUser(user)) {
+            if (um.addNewUser(user)) {
                 //request.getSession().setAttribute("user", user);
                 //request.getRequestDispatcher("WEB-INF/pages/loginform.jsp").forward(request, response);
                 resp.sendRedirect("/amt/login");

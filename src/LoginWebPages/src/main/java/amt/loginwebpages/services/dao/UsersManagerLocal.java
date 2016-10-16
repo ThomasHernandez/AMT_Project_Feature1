@@ -51,6 +51,21 @@ public interface UsersManagerLocal {
      */
     public void updateUser(String userNameToUpdate, String newPassword, String newFirstName, String newLastName);
   
-  
+    /**
+     *
+     * @param user
+     * @return
+     */
+    public boolean addNewUser(User user);
+
+    /**
+     *
+     * @param user
+     * @param testPassword
+     * @return
+     */
+    public boolean isValidCredentials(User user, String testPassword);
+
+
     
 }

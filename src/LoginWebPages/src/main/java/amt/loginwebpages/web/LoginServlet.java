@@ -6,8 +6,7 @@
 package amt.loginwebpages.web;
 
 import amt.loginwebpages.model.User;
-import amt.loginwebpages.services.LoginManager;
-import amt.loginwebpages.services.LoginManagerLocal;
+import amt.loginwebpages.services.dao.UsersManagerLocal;
 import java.io.IOException;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -22,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginServlet extends HttpServlet {
     
     @EJB
-    private LoginManagerLocal lm;
+    private UsersManagerLocal um;
 
 
     /**
@@ -62,10 +61,12 @@ public class LoginServlet extends HttpServlet {
 
         
         String username = request.getParameter("userName");
+        System.out.println(username);
         String password = request.getParameter("userPassword");
-        User user = lm.loadUser(username);
-        
-        if(user != null && lm.isValidCredentials(user, password)){
+        System.out.println(password);
+        User user = um.findUser(username);
+        System.out.println(user);
+        if(user != null && um.isValidCredentials(user, password)){
             
             request.getSession().setAttribute("user", user);
             //response.sendRedirect(request.getServletContext().getContextPath() + "/");
