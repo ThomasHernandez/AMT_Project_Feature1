@@ -12,12 +12,45 @@ import javax.ejb.Local;
 /**
  *
  * @author Thomas
+ * @author Antony
  */
 
 @Local
 public interface UsersManagerLocal {
     
-  public User loadUser(String userName);
-  public List<User> findAllUsers();
+    /**
+     * Returns a User object with the specified username
+     *
+     * 
+     * @param userName
+     * @return User object if found null otherwise
+     */
+    public User findUser(String userName);
+ 
+    /**
+     *  Returns all the User in the database
+     * 
+     * @return List of all users in the database
+     */
+    public List<User> findAllUsers(); 
+
+    /**
+     * Deletes the user with the specified username
+     * 
+     * @param userName
+     */
+    public void deleteUser(String userName);
+
+    /**
+     * Update the user with specified username's field with the non empty other fields
+     * 
+     * @param userNameToUpdate
+     * @param newPassword
+     * @param newFirstName
+     * @param newLastName
+     */
+    public void updateUser(String userNameToUpdate, String newPassword, String newFirstName, String newLastName);
+  
+  
     
 }

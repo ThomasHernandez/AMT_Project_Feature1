@@ -19,6 +19,7 @@ import javax.sql.DataSource;
 /**
  *
  * @author Thomas
+ * @author Antony
  */
 @Stateless
 public class UsersManager implements UsersManagerLocal {
@@ -28,23 +29,41 @@ public class UsersManager implements UsersManagerLocal {
 
 
     @Override
-    public User loadUser(String userName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public User findUser(String userName) {
+        User user = null;
+        try {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM user WHERE user_username = \"" + userName + "\"");
+            ResultSet rs = pstmt.executeQuery();
+            while(rs.next()) {
+                
+                String firstName = rs.getString("user_first_name");
+                String lastName = rs.getString("user_last_name");
+                String password = rs.getString("user_password");
+                user = new User(userName, password, firstName, lastName);
+                
+            }
+            connection.close();
+        } catch (SQLException ex) {
+            System.err.println("ERROR in package DAO - UsersManager " +  ex);
+            //Logger.getLogger(UsersManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return user;
     }
 
     @Override
     public List<User> findAllUsers() {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
         List<User> users = new ArrayList<>();
         try {
             Connection connection = dataSource.getConnection();
-            PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM users");
+            PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM user");
             ResultSet rs = pstmt.executeQuery();
             while(rs.next()) {
-                String userName = rs.getString("user_name");
-                String firstName = rs.getString("first_name");
-                String lastName = rs.getString("last_name");
-                String password = rs.getString("password");
+                String userName = rs.getString("user_username");
+                String firstName = rs.getString("user_first_name");
+                String lastName = rs.getString("user_last_name");
+                String password = rs.getString("user_password");
                 users.add(new User(userName, password, firstName, lastName));
                 
             }
@@ -56,6 +75,49 @@ public class UsersManager implements UsersManagerLocal {
         return users;
     }
     
+    public void deleteUser(String userName){
+
+        try {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement("DELETE FROM user WHERE user_username = \"" + userName + "\"");
+            ResultSet rs = pstmt.executeQuery();
+            
+            connection.close();
+        } catch (SQLException ex) {
+            System.err.println("ERROR in package DAO - UsersManager " +  ex);
+            //Logger.getLogger(UsersManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
     
+    public void updateUser(String userNameToUpdate, String newPassword, String newFirstName, String newLastName){
+        
+        try {
+            Connection connection = dataSource.getConnection();
+            
+            if(!newPassword.isEmpty()){
+                PreparedStatement pstmt = connection.prepareStatement("UPDATE user SET user_password = \""+ newPassword  +"\" WHERE user_username = \"" + userNameToUpdate + "\"");
+                ResultSet rs = pstmt.executeQuery();
+            }
+            
+            if(!newFirstName.isEmpty()){
+                PreparedStatement pstmt = connection.prepareStatement("UPDATE user SET user_first_name = \""+ newFirstName +"\" WHERE user_username = \"" + userNameToUpdate + "\"");
+                ResultSet rs = pstmt.executeQuery();
+            }
+            
+            if(!newLastName.isEmpty()){
+                PreparedStatement pstmt = connection.prepareStatement("UPDATE user SET user_last_name = \""+ newLastName +"\" WHERE user_username = \"" + userNameToUpdate + "\"");
+                ResultSet rs = pstmt.executeQuery();
+                
+            }
+           
+            connection.close();
+        } catch (SQLException ex) {
+            System.err.println("ERROR in package DAO - UsersManager " +  ex);
+            //Logger.getLogger(UsersManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }
     
 }
