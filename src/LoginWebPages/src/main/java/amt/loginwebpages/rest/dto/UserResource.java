@@ -18,7 +18,6 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
-import amt.loginwebpages.services.LoginManagerLocal;
 import amt.loginwebpages.services.dao.UsersManagerLocal;
 import java.net.URI;
 import javax.ws.rs.Consumes;
@@ -27,6 +26,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+
 
 /**
  *
@@ -85,31 +86,67 @@ public class UserResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateInfoUser(@PathParam(value = "id") String id, UpdateUserDTO dto){
         User user = um.findUser(id);
-        user.setFirstName(dto.getFirstname());
-        user.setLastName(dto.getLastname());
-        user.setPassword(dto.getPassword());
-        //um.updateUser(user);
-        return Response
+        if(user != null){
+            user.setFirstName(dto.getFirstname());
+            user.setLastName(dto.getLastname());
+            user.setPassword(dto.getPassword());
+            um.updateUser(user);
+            return Response
                 .accepted("User updated").build();
+            
+        }
+        else{
+            return Response
+                .notModified("User doesn't exist").build();
+            
+        }
+        
+       
 }
     
 
+//    @Path("{id}")
+//    @GET
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public UserDTONoPsw getUser(@PathParam(value = "id") String id) {
+//        User user = um.findUser(id);
+//        return toUserDTO(user);
+//    }
+    
     @Path("{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public UserDTONoPsw getUser(@PathParam(value = "id") String id) {
+    public Response getUser(@PathParam(value = "id") String id) {
         User user = um.findUser(id);
-        return toUserDTO(user);
+        if(user != null){
+            
+            return Response.ok(toUserDTO(user)).build();
+        }
+        else{
+            
+            return Response.status(Status.NOT_FOUND).build();
+        }
+        
     }
+    
     
     @Path("{id}")
     @DELETE
-    @Produces(MediaType.APPLICATION_JSON)
+    //@Produces(MediaType.APPLICATION_JSON)
     public Response deleteUser(@PathParam(value = "id") String id) {
         User user = um.findUser(id);
-        um.deleteUser(user.getUsername());
-        return Response
-                .accepted("User deleted").build();
+        if(user != null){
+            
+            um.deleteUser(user.getUsername());
+            return Response
+                    .accepted("User deleted").build();
+            
+        }
+        else{
+            return Response
+                    .notModified("User doesn't exist").build();
+        }
+        
     }
 
     public User fromUserDTO(UserDTO dto) {

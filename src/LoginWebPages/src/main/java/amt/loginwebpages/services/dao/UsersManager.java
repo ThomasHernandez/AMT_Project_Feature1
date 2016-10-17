@@ -79,8 +79,9 @@ public class UsersManager implements UsersManagerLocal {
 
         try {
             Connection connection = dataSource.getConnection();
+            
             PreparedStatement pstmt = connection.prepareStatement("DELETE FROM user WHERE user_username = \"" + userName + "\"");
-            ResultSet rs = pstmt.executeQuery();
+            pstmt.executeUpdate();
             
             connection.close();
         } catch (SQLException ex) {

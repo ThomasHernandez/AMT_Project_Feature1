@@ -42,7 +42,7 @@ public class ProtectedAccessFilter implements Filter {
             FilterChain chain)
             throws IOException, ServletException {
         //request.setAttribute("loginManager", lm);
-        
+        request.setCharacterEncoding("UTF-8");
         HttpServletRequest hsr = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse)response;
         String path = hsr.getRequestURI().substring(hsr.getContextPath().length());
