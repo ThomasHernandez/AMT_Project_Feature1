@@ -19,9 +19,12 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 import amt.loginwebpages.services.LoginManagerLocal;
+import amt.loginwebpages.services.dao.UsersManagerLocal;
 import java.net.URI;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
@@ -31,23 +34,21 @@ import javax.ws.rs.core.Response;
  */
 
 
-//ON A BESOIN D'UNE DTO POUR LE GET ET D'UNE AUTRE POUR LE POST!!
-//DONC UNE FOIS AVEC LE MDP DANS LE CONSTRUCTEUR (DANS POST) ET UNE FOIS SANS (GET)
 
 @Stateless
 @Path("/users")
 public class UserResource {
-
+    
     @EJB
-    private LoginManagerLocal lm;
+    private UsersManagerLocal um;
 
     @Context
     UriInfo uriInfo;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<UserDTO> getUsers(@QueryParam(value = "byName") String byName) {
-        List<User> users = lm.findAllUsers();
+    public List<UserDTONoPsw> getUsers(@QueryParam(value = "byName") String byName) {
+        List<User> users = um.findAllUsers();
         return users.stream()
                 .filter(p -> byName == null || p.getLastName().equalsIgnoreCase(byName))
                 .map(p -> toUserDTO(p))
@@ -60,7 +61,7 @@ public class UserResource {
     public Response createUser(UserDTO userDTO) {
         User user = fromUserDTO(userDTO);
 
-        if (lm.addNewUser(user)) {
+        if (um.addNewUser(user)) {
             String userName = userDTO.getUsername();
             URI href = uriInfo
                     .getBaseUriBuilder()
@@ -78,23 +79,47 @@ public class UserResource {
                 .build();
 
     }
+    
+    @Path("{id}")
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateInfoUser(@PathParam(value = "id") String id, UpdateUserDTO dto){
+        User user = um.findUser(id);
+        user.setFirstName(dto.getFirstname());
+        user.setLastName(dto.getLastname());
+        user.setPassword(dto.getPassword());
+        //um.updateUser(user);
+        return Response
+                .accepted("User updated").build();
+}
+    
 
     @Path("{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public UserDTO getUser(@PathParam(value = "id") String id) {
-        User user = lm.loadUser(id);
+    public UserDTONoPsw getUser(@PathParam(value = "id") String id) {
+        User user = um.findUser(id);
         return toUserDTO(user);
+    }
+    
+    @Path("{id}")
+    @DELETE
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteUser(@PathParam(value = "id") String id) {
+        User user = um.findUser(id);
+        um.deleteUser(user.getUsername());
+        return Response
+                .accepted("User deleted").build();
     }
 
     public User fromUserDTO(UserDTO dto) {
 
-        return new User(dto.getUsername(), "Toor1234", dto.getFirstname(), dto.getLastname());
+        return new User(dto.getUsername(), dto.getPassword(), dto.getFirstname(), dto.getLastname());
     }
 
-    public UserDTO toUserDTO(User user) {
+    public UserDTONoPsw toUserDTO(User user) {
         
-        return new UserDTO(user.getUsername(), user.getFirstName(), user.getLastName());
+        return new UserDTONoPsw(user.getUsername(), user.getFirstName(), user.getLastName());
     }
     
 

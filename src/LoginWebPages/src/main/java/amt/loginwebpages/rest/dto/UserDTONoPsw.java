@@ -9,21 +9,20 @@ package amt.loginwebpages.rest.dto;
  *
  * @author Thomas
  */
-public class UserDTO {
+public class UserDTONoPsw {
+
     
     private String userName;
     private String firstName;
     private String lastName;
-    private String password;
 
-    public UserDTO() {
+    public UserDTONoPsw() {
     }
 
-    public UserDTO(String userName, String password, String firstName, String lastName) {
+    public UserDTONoPsw(String userName, String firstName, String lastName) {
         this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.password = password;
     }
 
     public String getUsername() {
@@ -37,10 +36,6 @@ public class UserDTO {
     public String getLastname() {
         return lastName;
     }
-    
-    public String getPassword() {
-        return password;
-    }
    
     public void setUsername(String username) {
         this.userName = username;
@@ -53,10 +48,7 @@ public class UserDTO {
     public void setLastname(String lastName) {
         this.lastName = lastName;
     }
-    
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     
 }
+

@@ -90,23 +90,23 @@ public class UsersManager implements UsersManagerLocal {
 
     }
     
-    public void updateUser(String userNameToUpdate, String newPassword, String newFirstName, String newLastName){
+    public void updateUser(User userToUpdate){
         
         try {
             Connection connection = dataSource.getConnection();
             
-            if(!newPassword.isEmpty()){
-                PreparedStatement pstmt = connection.prepareStatement("UPDATE user SET user_password = \""+ newPassword  +"\" WHERE user_username = \"" + userNameToUpdate + "\"");
+            if(!userToUpdate.getPassword().isEmpty()){
+                PreparedStatement pstmt = connection.prepareStatement("UPDATE user SET user_password = \""+ userToUpdate.getPassword()  +"\" WHERE user_username = \"" + userToUpdate.getUsername()+ "\"");
                 pstmt.executeUpdate();
             }
             
-            if(!newFirstName.isEmpty()){
-                PreparedStatement pstmt = connection.prepareStatement("UPDATE user SET user_first_name = \""+ newFirstName +"\" WHERE user_username = \"" + userNameToUpdate + "\"");
+            if(!userToUpdate.getFirstName().isEmpty()){
+                PreparedStatement pstmt = connection.prepareStatement("UPDATE user SET user_first_name = \""+ userToUpdate.getFirstName() +"\" WHERE user_username = \"" + userToUpdate.getUsername() + "\"");
                 pstmt.executeUpdate();
             }
             
-            if(!newLastName.isEmpty()){
-                PreparedStatement pstmt = connection.prepareStatement("UPDATE user SET user_last_name = \""+ newLastName +"\" WHERE user_username = \"" + userNameToUpdate + "\"");
+            if(!userToUpdate.getLastName().isEmpty()){
+                PreparedStatement pstmt = connection.prepareStatement("UPDATE user SET user_last_name = \""+ userToUpdate.getLastName() +"\" WHERE user_username = \"" + userToUpdate.getUsername() + "\"");
                 pstmt.executeUpdate();
                 
             }

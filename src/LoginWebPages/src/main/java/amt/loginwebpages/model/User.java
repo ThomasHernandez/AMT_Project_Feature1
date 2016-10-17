@@ -12,9 +12,9 @@ package amt.loginwebpages.model;
 public class User {
     
     private final String userName;
-    private final String password;
-    private final String firstName;
-    private final String lastName;
+    private String password;
+    private String firstName;
+    private String lastName;
 
     public User(String username, String password, String firstName, String lastName) {
         this.userName = username;
@@ -34,11 +34,22 @@ public class User {
     public String getFirstName() {
         return firstName;
     }
-
-    public String getLastName() {
+    
+     public String getLastName() {
         return lastName;
     }
-    
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
     @Override
     public String toString() {

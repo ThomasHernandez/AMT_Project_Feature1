@@ -49,7 +49,7 @@ public interface UsersManagerLocal {
      * @param newFirstName
      * @param newLastName
      */
-    public void updateUser(String userNameToUpdate, String newPassword, String newFirstName, String newLastName);
+    public void updateUser(User user);
   
     /**
      *
