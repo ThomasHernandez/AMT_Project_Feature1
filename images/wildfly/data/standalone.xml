@@ -137,7 +137,7 @@
         <subsystem xmlns="urn:jboss:domain:datasources:4.0">
             <datasources>
 				<datasource jta="true" jndi-name="java:/jdbc/amt" pool-name="amtDS" enabled="true" use-ccm="true">
-                    <connection-url>jdbc:mysql://db:3306/sakila</connection-url>
+                    <connection-url>jdbc:mysql://db:3306/users</connection-url>
                     <driver-class>com.mysql.jdbc.Driver</driver-class>
                     <driver>mysql-connector-java-5.1.40-bin.jar_com.mysql.jdbc.Driver_5_1</driver>
                     <security>
