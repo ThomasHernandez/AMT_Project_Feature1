@@ -2,7 +2,7 @@ FROM jboss/wildfly:10.1.0.Final
 
 MAINTAINER Ciani Antony <antony.ciani@heig-vd.ch>
 
-COPY apps-dist/StaticWebPage-1.0-SNAPSHOT.war /opt/jboss/wildfly/standalone/deployments/StaticWebPage-1.0-SNAPSHOT.war
+COPY apps-dist/LoginWebPages-1.0-SNAPSHOT.war /opt/jboss/wildfly/standalone/deployments/LoginWebPages-1.0-SNAPSHOT.war
 
 COPY data/mysql-connector-java-5.1.40-bin.jar /opt/jboss/wildfly/standalone/deployments
 
