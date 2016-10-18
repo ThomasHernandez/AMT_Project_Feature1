@@ -1,9 +1,3 @@
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package amt.loginwebpages.rest.dto;
 
 import amt.loginwebpages.model.User;
@@ -31,7 +25,7 @@ import javax.ws.rs.core.Response.Status;
 
 /**
  *
- * @author Thomas
+ * @author Thomas Hernandez
  */
 
 
@@ -46,6 +40,11 @@ public class UserResource {
     @Context
     UriInfo uriInfo;
 
+    /**
+     *
+     * @param byName
+     * @return
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<UserDTONoPsw> getUsers(@QueryParam(value = "byName") String byName) {
@@ -57,6 +56,11 @@ public class UserResource {
 
     }
 
+    /**
+     *
+     * @param userDTO
+     * @return
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createUser(UserDTO userDTO) {
@@ -81,6 +85,12 @@ public class UserResource {
 
     }
     
+    /**
+     *
+     * @param id
+     * @param dto
+     * @return
+     */
     @Path("{id}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
@@ -112,6 +122,12 @@ public class UserResource {
 //        User user = um.findUser(id);
 //        return toUserDTO(user);
 //    }
+
+    /**
+     *
+     * @param id
+     * @return
+     */
     
     @Path("{id}")
     @GET
@@ -129,7 +145,11 @@ public class UserResource {
         
     }
     
-    
+    /**
+     *
+     * @param id
+     * @return
+     */
     @Path("{id}")
     @DELETE
     //@Produces(MediaType.APPLICATION_JSON)
@@ -149,11 +169,21 @@ public class UserResource {
         
     }
 
+    /**
+     *
+     * @param dto
+     * @return
+     */
     public User fromUserDTO(UserDTO dto) {
 
         return new User(dto.getUsername(), dto.getPassword(), dto.getFirstname(), dto.getLastname());
     }
 
+    /**
+     *
+     * @param user
+     * @return
+     */
     public UserDTONoPsw toUserDTO(User user) {
         
         return new UserDTONoPsw(user.getUsername(), user.getFirstName(), user.getLastName());

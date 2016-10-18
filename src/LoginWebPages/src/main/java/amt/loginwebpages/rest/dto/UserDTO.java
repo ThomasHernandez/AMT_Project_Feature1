@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package amt.loginwebpages.rest.dto;
 
 /**
  *
- * @author Thomas
+ * @author Thomas Hernandez
  */
 public class UserDTO {
     
@@ -16,9 +11,19 @@ public class UserDTO {
     private String lastName;
     private String password;
 
+    /**
+     *
+     */
     public UserDTO() {
     }
 
+    /**
+     *
+     * @param userName
+     * @param password
+     * @param firstName
+     * @param lastName
+     */
     public UserDTO(String userName, String password, String firstName, String lastName) {
         this.userName = userName;
         this.firstName = firstName;
@@ -26,34 +31,66 @@ public class UserDTO {
         this.password = password;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getUsername() {
         return userName;
     }
     
+    /**
+     *
+     * @return
+     */
     public String getFirstname() {
         return firstName;
     }
     
+    /**
+     *
+     * @return
+     */
     public String getLastname() {
         return lastName;
     }
     
+    /**
+     *
+     * @return
+     */
     public String getPassword() {
         return password;
     }
    
+    /**
+     *
+     * @param username
+     */
     public void setUsername(String username) {
         this.userName = username;
     }
     
+    /**
+     *
+     * @param firstName
+     */
     public void setFirstname(String firstName) {
         this.firstName = firstName;
     }
     
+    /**
+     *
+     * @param lastName
+     */
     public void setLastname(String lastName) {
         this.lastName = lastName;
     }
     
+    /**
+     *
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }

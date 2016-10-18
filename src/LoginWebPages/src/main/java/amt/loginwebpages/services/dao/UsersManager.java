@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package amt.loginwebpages.services.dao;
 
 import amt.loginwebpages.model.User;
@@ -18,8 +13,8 @@ import javax.sql.DataSource;
 
 /**
  *
- * @author Thomas
- * @author Antony
+ * @author Thomas Hernandez
+ * @author Antony Ciani
  */
 @Stateless
 public class UsersManager implements UsersManagerLocal {

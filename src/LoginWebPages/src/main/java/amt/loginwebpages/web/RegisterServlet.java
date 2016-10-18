@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package amt.loginwebpages.web;
 
 import amt.loginwebpages.model.User;
@@ -16,14 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Thomas
+ * @author Thomas Hernandez
  */
 public class RegisterServlet extends HttpServlet {
     
     @EJB
     private UsersManagerLocal um;
-
-      
 
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -36,25 +29,6 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        /*if(request.getSession().getAttribute("username") != null){
-            if(lm.isUsernameRegistered(request.getSession().getAttribute("username").toString())){
-                
-                request.getSession();
-                
-                request.getRequestDispatcher("WEB-INF/pages/authorizedonly.html").forward(request, response);
-               
-            }
-            else{
-                request.getRequestDispatcher("WEB-INF/pages/registerform.jsp").forward(request, response);
-                
-            }
-            
-        }
-        else{
-             request.getRequestDispatcher("WEB-INF/pages/registerform.jsp").forward(request, response);
-            
-        }*/
         request.getRequestDispatcher("WEB-INF/pages/registerform.jsp").forward(request, response);
    
     }
@@ -71,7 +45,6 @@ public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        //LoginManager lm = (LoginManager) request.getAttribute("loginManager");
         HttpServletResponse resp = (HttpServletResponse)response;
         
         String newFirstName = request.getParameter("firstName");
@@ -87,17 +60,10 @@ public class RegisterServlet extends HttpServlet {
             User user = new User(newUserName, newPassword, newFirstName, newLastName);
 
             if (um.addNewUser(user)) {
-                //request.getSession().setAttribute("user", user);
-                //request.getRequestDispatcher("WEB-INF/pages/loginform.jsp").forward(request, response);
                 resp.sendRedirect("/amt/login");
             } else {
                 request.getRequestDispatcher("WEB-INF/pages/registerform.jsp").forward(request, response);
             }
-        //}
-        
-            
-        
-        
     }
 
     /**
@@ -108,6 +74,6 @@ public class RegisterServlet extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package amt.loginwebpages.services.dao;
 
 import amt.loginwebpages.model.User;
@@ -11,8 +6,8 @@ import javax.ejb.Local;
 
 /**
  *
- * @author Thomas
- * @author Antony
+ * @author Thomas Hernandez
+ * @author Antony Ciani
  */
 
 @Local
@@ -44,10 +39,7 @@ public interface UsersManagerLocal {
     /**
      * Update the user with specified username's field with the non empty other fields
      * 
-     * @param userNameToUpdate
-     * @param newPassword
-     * @param newFirstName
-     * @param newLastName
+     * @param user
      */
     public void updateUser(User user);
   

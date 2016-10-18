@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package amt.loginwebpages.web;
 
 import java.io.IOException;
@@ -17,12 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Antony
+ * @author Antony Ciani
+ * @author Thomas Hernandez
  */
 public class ProtectedAccessFilter implements Filter {
     
-
-    
+    /**
+     *
+     * @param filterConfig
+     * @throws ServletException
+     */
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -41,7 +40,6 @@ public class ProtectedAccessFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
-        //request.setAttribute("loginManager", lm);
         request.setCharacterEncoding("UTF-8");
         HttpServletRequest hsr = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse)response;
@@ -53,7 +51,6 @@ public class ProtectedAccessFilter implements Filter {
         
         if (hsr.getSession().getAttribute("user") != null) {
             if (path.contentEquals("/login")) {
-                //request.getRequestDispatcher("WEB-INF/pages/protectedPage.jsp").forward(request, response);
                 resp.sendRedirect("/amt/protected");
             }
             else {
@@ -61,8 +58,6 @@ public class ProtectedAccessFilter implements Filter {
             }
         }
         else if (path.contentEquals("/protected")) {
-            //path = path + "login";
-            //request.getRequestDispatcher("/login").forward(request, response);
             resp.sendRedirect("/amt/login");
         }
         else {
@@ -70,6 +65,9 @@ public class ProtectedAccessFilter implements Filter {
         }
     } 
 
+    /**
+     *
+     */
     @Override
     public void destroy() {
         
