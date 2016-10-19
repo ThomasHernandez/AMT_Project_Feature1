@@ -129,8 +129,6 @@
         </div>
     </section>
 
-    <!-- Map Section -->
-    <div id="map"></div>
 
     <!-- Footer -->
     <footer>

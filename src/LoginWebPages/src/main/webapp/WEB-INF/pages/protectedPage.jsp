@@ -86,10 +86,9 @@
                         <table id="users" class="table table-responsive table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <tr>
+                                <th class="text-center">Username</th>
                                 <th class="text-center">First Name</th>
                                 <th class="text-center">Last Name</th>
-                                <th class="text-center">Username</th>
-
                             </tr>
                         </thead>
                         </table>
