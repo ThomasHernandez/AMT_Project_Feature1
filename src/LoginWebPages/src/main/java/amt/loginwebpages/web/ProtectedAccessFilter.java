@@ -47,6 +47,7 @@ public class ProtectedAccessFilter implements Filter {
         
         if(path.contentEquals("/")) {
             resp.sendRedirect("/amt/home");
+            return;
         }
         
         if (hsr.getSession().getAttribute("user") != null) {

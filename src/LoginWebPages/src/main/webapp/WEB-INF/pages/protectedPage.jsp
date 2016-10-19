@@ -83,7 +83,20 @@
                     <div class="col-md-8 col-md-offset-2">
                         <h1 class="brand-heading">Secret Content</h1>
                         <p class="intro-text">You have reached our special page, have fun!</p>
-						<img src="http://digitalsynopsis.com/wp-content/uploads/2015/03/web-designer-developer-jokes-humour-funny-41.jpg" >
+                        <table id="users" class="table table-responsive table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th class="text-center">First Name</th>
+                                <th class="text-center">Last Name</th>
+                                <th class="text-center">Username</th>
+
+                            </tr>
+                        </thead>
+                        </table>
+                        <br>
+                        <br>
+                        <br>
+			<img src="http://digitalsynopsis.com/wp-content/uploads/2015/03/web-designer-developer-jokes-humour-funny-41.jpg" >
                     </div>
                 </div>
             </div>
@@ -101,16 +114,40 @@
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
+    
+    <!-- Datatables Pugin -->
+    <script type="text/javascript" src="js/datatables.min.js"></script>
 
+    
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
     <!-- Plugin JavaScript -->
     <script src="js/jquery.easing.min.js"></script>
+    
+     <script>
+        $(document).ready(function() {
+            $('#users').DataTable( {
+                "ajax": {
+                    "url": "/amt/api/users",
+                    "dataSrc": ""
+                },
 
+                "columns": [
+                    { "data": "username" },
+                    { "data": "firstname" },
+                    { "data": "lastname" }
+                    
+                ]
+            } );
+        } );
+
+    </script>
+    
+   
     <!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
-
+    
     <!-- Custom Theme JavaScript -->
     <script src="js/grayscale.js"></script>
 
