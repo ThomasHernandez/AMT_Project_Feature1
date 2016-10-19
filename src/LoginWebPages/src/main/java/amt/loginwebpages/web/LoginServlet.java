@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         //request.setAttribute("users", lm.findAllUsers());
         //request.getRequestDispatcher("WEB-INF/pages/users.jsp").forward(request, response);
         
