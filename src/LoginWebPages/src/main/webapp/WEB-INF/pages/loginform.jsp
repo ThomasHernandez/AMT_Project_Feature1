@@ -7,6 +7,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,9 +40,13 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    
+
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+    
+
     
     
     
@@ -96,35 +102,50 @@
                     <div class="col-md-8 col-md-offset-2">
                         <h1 class="brand-heading">Login</h1>
                         <p class="intro-text">Please enter your credentials to access the protected page</p>
-						<div class="row">
-						
-						<h2>
-							<form name="login" method="post" action="login" accept-charset="utf-8">
-                                                        <!--<form action="login">-->
-								<p class="text-left" ><label for="username">Username</label>
-								<input type="text" name="userName" id="inputUsername" class="form-control" placeholder="username" required>
-								<p class="text-left" ><label for="password">Password</label>
-								<input type="password" name="userPassword" id="inputPassword" class="form-control" placeholder="password" required>
-								<p>
-								<input class="btn btn-lg btn-success btn-block" type="submit" value="Login">
-                                                                
-							  
-							</form>
-                                                        <!--<form action="login">
-                                                         User Name:<input type="text" name="userName"/><br/>
-                                                          Password:<input type="text" name="userPassword"/><br/>
-                                                          <input type="submit" value="submit"/>
-                                                        </form>-->
-                                                </h2>
-						
-						</div>
-						<p class="intro-text"><a href="register">Click here if you don't have an account yet!</a></p>
+                        <div class="row">
+
+                            <h2>
+                                <form name="login" method="post" action="login" accept-charset="utf-8">
+                                    <!--<form action="login">-->
+                                    <p class="text-left" ><label for="username">Username</label>
+                                        <input type="text" name="userName" id="inputUsername" class="form-control" placeholder="username" required>
+                                    <p class="text-left" ><label for="password">Password</label>
+                                        <input type="password" name="userPassword" id="inputPassword" class="form-control" placeholder="password" required>
+                                    <p>
+                                        <input class="btn btn-lg btn-success btn-block" type="submit" value="Login">
+
+
+                                </form>
+                                
+                                
+                            </h2>
+                            
+                            <c:if test="${requestScope.message != null}">
+                                <div class="alert alert-danger fade in">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong>ERROR: </strong> ${requestScope.message}
+                                </div>
+                            </c:if>
+                            <c:if test="${sessionScope.message != null}">
+                                <div class="alert alert-success fade in">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong>SUCCESS: </strong> ${sessionScope.message}
+                                </div>
+                            </c:if>
+
+                        </div>
+                        
+                        
+                        
+
+                        <p class="intro-text"><a href="register">Click here if you don't have an account yet!</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </header>
-	
+    
+    
   
 
     <!-- Footer -->

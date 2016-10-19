@@ -46,6 +46,8 @@ public class RegisterServlet extends HttpServlet {
             throws ServletException, IOException {
         
         HttpServletResponse resp = (HttpServletResponse)response;
+        String message;
+        String registered;
         
         String newFirstName = request.getParameter("firstName");
         String newLastName = request.getParameter("lastName");
@@ -54,14 +56,21 @@ public class RegisterServlet extends HttpServlet {
         String newPasswordConfirm = request.getParameter("userPasswordConfirm");
 
         if (!newPassword.equals(newPasswordConfirm)) {
+            message = "Passwords must be the same!";
+            request.setAttribute("message", message);
             request.getRequestDispatcher("WEB-INF/pages/registerform.jsp").forward(request, response);
             return;
         }
             User user = new User(newUserName, newPassword, newFirstName, newLastName);
 
             if (um.addNewUser(user)) {
+                registered = "You have successfully registered";
+                request.getSession().setAttribute("message", registered);
+                //request.setAttribute("registered", registered);
                 resp.sendRedirect("/amt/login");
             } else {
+                message = "Username already exists!";
+                request.setAttribute("message", message);
                 request.getRequestDispatcher("WEB-INF/pages/registerform.jsp").forward(request, response);
             }
     }

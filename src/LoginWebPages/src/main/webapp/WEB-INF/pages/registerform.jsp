@@ -91,24 +91,30 @@
                     <div class="col-md-8 col-md-offset-2">
                         <h1 class="brand-heading">Registration</h1>
                         <p class="intro-text">Here you can create a new user account</p>
-						<h2>
-							<form name="login" method="POST" action="register" accept-charset="utf-8">
-                                                                <p class="text-left" ><label for="firstName">FirstName</label>
-								<input type="text" name="firstName" id="inputFirstName" class="form-control" placeholder="firstName" required>
-                                                                <p class="text-left" ><label for="lastName">LastName</label>
-								<input type="text" name="lastName" id="inputLastName" class="form-control" placeholder="lastName" required>
-								<p class="text-left" ><label for="username">Username</label>
-								<input type="text" name="userName" id="inputUsername" class="form-control" placeholder="username" required>
-								<p class="text-left" ><label for="password">Password</label>
-								<input type="password" name="userPassword" id="inputPassword" class="form-control" placeholder="password" required>
-                                                                <p class="text-left" ><label for="password">Confirm Password</label>
-								<input type="password" name="userPasswordConfirm" id="inputPassword" class="form-control" placeholder="confirm password" required>
-								<p>
-								<input class="btn btn-lg btn-success btn-block" type="submit" value="register">
-                                                                <!--<a href="login"><input type="submit" value="register"></a>-->
-							  
-							</form>
-						</h2>
+                        <h2>
+                            <form name="login" method="POST" action="register" accept-charset="utf-8">
+                                <p class="text-left" ><label for="firstName">FirstName</label>
+                                    <input type="text" name="firstName" id="inputFirstName" class="form-control" placeholder="firstname" required>
+                                <p class="text-left" ><label for="lastName">LastName</label>
+                                    <input type="text" name="lastName" id="inputLastName" class="form-control" placeholder="lastname" required>
+                                <p class="text-left" ><label for="username">Username</label>
+                                    <input type="text" name="userName" id="inputUsername" class="form-control" placeholder="username" required>
+                                <p class="text-left" ><label for="password">Password</label>
+                                    <input type="password" name="userPassword" id="inputPassword" class="form-control" placeholder="password" required>
+                                <p class="text-left" ><label for="password">Confirm Password</label>
+                                    <input type="password" name="userPasswordConfirm" id="inputPassword" class="form-control" placeholder="confirm password" required>
+                                <p>
+                                    <input class="btn btn-lg btn-success btn-block" type="submit" value="register">
+                                    <!--<a href="login"><input type="submit" value="register"></a>-->
+
+                            </form>
+                        </h2>
+                        <c:if test="${requestScope.message != null}">
+                            <div class="alert alert-danger fade in">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>ERROR: </strong> ${requestScope.message}
+                            </div>
+                        </c:if>
                     </div>
                 </div>
             </div>

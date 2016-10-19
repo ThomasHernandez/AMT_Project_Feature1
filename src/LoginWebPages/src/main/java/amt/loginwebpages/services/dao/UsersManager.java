@@ -119,21 +119,26 @@ public class UsersManager implements UsersManagerLocal {
     
     public boolean addNewUser(User user){
         
-        try {
-            Connection connection = dataSource.getConnection();
-            System.out.println("INSERT INTO user VALUES (NULL, \""+user.getUsername()+"\", \""+user.getPassword() +"\", "
-                                                                    + "\""+user.getFirstName() +"\", \""+user.getLastName() +"\") ");
-            PreparedStatement pstmt = connection.prepareStatement("INSERT INTO user VALUES (NULL, \""+user.getUsername()+"\", \""+user.getPassword() +"\", "
-                                                                    + "\""+user.getFirstName() +"\", \""+user.getLastName() +"\")");
-            pstmt.executeUpdate();
-            connection.close();
-            return true;
+        if(findUser(user.getUsername()) == null) {
             
-        } catch (SQLException ex) {
-            System.err.println("ERROR in package DAO - UsersManager " +  ex);
-            return false;
-            //Logger.getLogger(UsersManager.class.getName()).log(Level.SEVERE, null, ex);
+        
+                try {
+                Connection connection = dataSource.getConnection();
+                System.out.println("INSERT INTO user VALUES (NULL, \"" + user.getUsername() + "\", \"" + user.getPassword() + "\", "
+                        + "\"" + user.getFirstName() + "\", \"" + user.getLastName() + "\") ");
+                PreparedStatement pstmt = connection.prepareStatement("INSERT INTO user VALUES (NULL, \"" + user.getUsername() + "\", \"" + user.getPassword() + "\", "
+                        + "\"" + user.getFirstName() + "\", \"" + user.getLastName() + "\")");
+                pstmt.executeUpdate();
+                connection.close();
+                return true;
+
+            } catch (SQLException ex) {
+                System.err.println("ERROR in package DAO - UsersManager " + ex);
+                return false;
+                //Logger.getLogger(UsersManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        return false;
         
     }
 

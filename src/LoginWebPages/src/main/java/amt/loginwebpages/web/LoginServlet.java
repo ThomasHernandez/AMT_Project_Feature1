@@ -17,6 +17,7 @@ public class LoginServlet extends HttpServlet {
     
     @EJB
     private UsersManagerLocal um;
+    
 
 
     /**
@@ -34,7 +35,9 @@ public class LoginServlet extends HttpServlet {
         //request.setAttribute("users", lm.findAllUsers());
         //request.getRequestDispatcher("WEB-INF/pages/users.jsp").forward(request, response);
         
+        
         request.getRequestDispatcher("WEB-INF/pages/loginform.jsp").forward(request, response);
+        request.getSession().setAttribute("message", null);
        
    
     }
@@ -53,14 +56,12 @@ public class LoginServlet extends HttpServlet {
         
         //LoginManager lm = (LoginManager) request.getAttribute("loginManager");
         HttpServletResponse resp = (HttpServletResponse)response;
+        String message;
 
         
         String username = request.getParameter("userName");
-        System.out.println(username);
         String password = request.getParameter("userPassword");
-        System.out.println(password);
         User user = um.findUser(username);
-        System.out.println(user);
         if(user != null && um.isValidCredentials(user, password)){
             
             request.getSession().setAttribute("user", user);
@@ -70,6 +71,8 @@ public class LoginServlet extends HttpServlet {
             resp.sendRedirect("/amt/protected");
         }
         else{ 
+            message = "Bad login";
+            request.setAttribute("message", message);
             request.getRequestDispatcher("WEB-INF/pages/loginform.jsp").forward(request, response);
             
         }    
