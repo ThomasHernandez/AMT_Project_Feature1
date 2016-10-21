@@ -21,7 +21,7 @@ public class UpdateUserDTO {
      *
      * @return
      */
-    public String getFirstname() { 
+    public String getFirstName() { 
         return firstName; 
     }
 
@@ -29,7 +29,7 @@ public class UpdateUserDTO {
      *
      * @return
      */
-    public String getLastname() { 
+    public String getLastName() { 
         return lastName; 
     }
 

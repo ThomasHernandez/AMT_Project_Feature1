@@ -54,25 +54,52 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        //LoginManager lm = (LoginManager) request.getAttribute("loginManager");
-        //HttpServletResponse resp = (HttpServletResponse)response;
-        String message;
+        String errorMessage;
 
         
         String username = request.getParameter("userName");
         String password = request.getParameter("userPassword");
+        
+        // Checking all fields are set
+        if(username.isEmpty() || password.isEmpty()){
+            errorMessage = "All fields must be provided!";
+            request.setAttribute("errorMessage", errorMessage);
+            request.getRequestDispatcher("WEB-INF/pages/registerform.jsp").forward(request, response);
+            return;
+            
+        }
+        
+        // Checking fields lengths to match database fields
+        
+        if(username.length() >= User.MAX_USERNAME_LENGTH){
+            
+            errorMessage = "Username is too long, must be at most " + User.MAX_USERNAME_LENGTH + " characters";
+            request.setAttribute("errorMessage", errorMessage);
+            request.getRequestDispatcher("WEB-INF/pages/registerform.jsp").forward(request, response);
+            return;
+        }
+        
+        if(password.length() >= User.MAX_PASSWORD_LENGTH){
+            
+            errorMessage = "Password is too long, must be at most " + User.MAX_PASSWORD_LENGTH + " characters";
+            request.setAttribute("errorMessage", errorMessage);
+            request.getRequestDispatcher("WEB-INF/pages/registerform.jsp").forward(request, response);
+            return;
+        }
+        
+        
         User user = um.findUser(username);
+        
         if(user != null && um.isValidCredentials(user, password)){
             
             request.getSession().setAttribute("user", user);
-            //response.sendRedirect(request.getServletContext().getContextPath() + "/");
-            //request.getRequestDispatcher("/protected").forward(request, response);
-            //request.getRequestDispatcher("WEB-INF/pages/protectedPage.jsp").forward(request, response);
             response.sendRedirect("protected");
+            
         }
         else{ 
-            message = "Bad login";
-            request.setAttribute("message", message);
+            
+            errorMessage = "Bad login";
+            request.setAttribute("errorMessage", errorMessage);
             request.getRequestDispatcher("WEB-INF/pages/loginform.jsp").forward(request, response);
             
         }    

@@ -26,6 +26,7 @@ import javax.ws.rs.core.Response.Status;
 /**
  *
  * @author Thomas Hernandez
+ * @author Antony Ciani
  */
 
 
@@ -66,6 +67,47 @@ public class UserResource {
     public Response createUser(UserDTO userDTO) {
         User user = fromUserDTO(userDTO);
 
+        // Checking if all fields are provided
+        if(user.getUsername().isEmpty() || user.getPassword().isEmpty() || user.getFirstName().isEmpty() || user.getLastName().isEmpty()){
+            
+            return Response
+                .notModified("All fields must be non empty!")
+                .build();
+  
+        }
+        
+        // Checking fields lengths to match database fields
+        
+        if(user.getUsername().length() >= User.MAX_USERNAME_LENGTH){
+
+            return Response
+                 .notModified("Username is too long, must be at most " + User.MAX_USERNAME_LENGTH + " characters")
+                 .build();
+        }
+        
+        if(user.getPassword().length() >= User.MAX_PASSWORD_LENGTH){
+            
+            return Response
+                .notModified("Password is too long, must be at most " + User.MAX_PASSWORD_LENGTH + " characters")
+                .build();
+        }
+        
+        if(user.getFirstName().length() >= User.MAX_FIRSTNAME_LENGTH){
+            
+            return Response
+                .notModified("First name is too long, must be at most " + User.MAX_FIRSTNAME_LENGTH + " characters")
+                .build();
+        }
+        
+        if(user.getLastName().length() >= User.MAX_LASTNAME_LENGTH){
+            
+            
+            return Response
+                .notModified("Last name is too long, must be at most " + User.MAX_LASTNAME_LENGTH + " characters")
+                .build();
+        }
+        
+        
         if (um.addNewUser(user)) {
             String userName = userDTO.getUsername();
             URI href = uriInfo
@@ -95,40 +137,57 @@ public class UserResource {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateInfoUser(@PathParam(value = "id") String id, UpdateUserDTO dto){
-        User user = um.findUser(id);
-        if(user != null){
-            user.setFirstName(dto.getFirstname());
-            user.setLastName(dto.getLastname());
-            user.setPassword(dto.getPassword());
-            um.updateUser(user);
-            return Response
-                .accepted("User updated").build();
-            
-        }
-        else{
-            return Response
-                .notModified("User doesn't exist").build();
-            
-        }
         
-       
-}
-    
+       // Checking fields lengths to match database fields
 
-//    @Path("{id}")
-//    @GET
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public UserDTONoPsw getUser(@PathParam(value = "id") String id) {
-//        User user = um.findUser(id);
-//        return toUserDTO(user);
-//    }
+       if(dto.getPassword().length() >= User.MAX_PASSWORD_LENGTH){
+
+           return Response
+               .notModified("Password is too long, must be at most " + User.MAX_PASSWORD_LENGTH + " characters")
+               .build();
+       }
+
+       if(dto.getFirstName().length() >= User.MAX_FIRSTNAME_LENGTH){
+
+           return Response
+               .notModified("First name is too long, must be at most " + User.MAX_FIRSTNAME_LENGTH + " characters")
+               .build();
+       }
+
+       if(dto.getLastName().length() >= User.MAX_LASTNAME_LENGTH){
+
+
+           return Response
+               .notModified("Last name is too long, must be at most " + User.MAX_LASTNAME_LENGTH + " characters")
+               .build();
+       }
+
+
+       User user = um.findUser(id);
+
+       if(user != null){
+           user.setFirstName(dto.getFirstName());
+           user.setLastName(dto.getLastName());
+           user.setPassword(dto.getPassword());
+           um.updateUser(user);
+           return Response
+               .accepted("User updated").build();
+
+       }
+       else{
+           return Response
+               .notModified("User doesn't exist").build();
+
+       }
+
+   }
+    
 
     /**
      *
      * @param id
      * @return
      */
-    
     @Path("{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)

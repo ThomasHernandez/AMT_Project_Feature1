@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  *
  * @author Thomas Hernandez
+ * @author Antony Ciani
  */
 public class RegisterServlet extends HttpServlet {
     
@@ -44,35 +45,83 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        //HttpServletResponse resp = (HttpServletResponse)response;
-        String message;
-        String registered;
-        
+
+        String errorMessage;
+                
         String newFirstName = request.getParameter("firstName");
         String newLastName = request.getParameter("lastName");
         String newUserName = request.getParameter("userName");
         String newPassword = request.getParameter("userPassword");
         String newPasswordConfirm = request.getParameter("userPasswordConfirm");
 
-        if (!newPassword.equals(newPasswordConfirm)) {
-            message = "Passwords must be the same!";
-            request.setAttribute("message", message);
+        // Checking all fields are set
+        if(newUserName.isEmpty() || newPassword.isEmpty() || newFirstName.isEmpty() || newLastName.isEmpty()){
+            errorMessage = "All fields must be provided!";
+            request.setAttribute("errorMessage", errorMessage);
+            request.getRequestDispatcher("WEB-INF/pages/registerform.jsp").forward(request, response);
+            return;
+            
+        }
+        
+        // Checking fields lengths to match database fields
+        
+        if(newUserName.length() >= User.MAX_USERNAME_LENGTH){
+            
+            errorMessage = "Username is too long, must be at most " + User.MAX_USERNAME_LENGTH + " characters";
+            request.setAttribute("errorMessage", errorMessage);
             request.getRequestDispatcher("WEB-INF/pages/registerform.jsp").forward(request, response);
             return;
         }
-            User user = new User(newUserName, newPassword, newFirstName, newLastName);
+        
+        if(newPassword.length() >= User.MAX_PASSWORD_LENGTH){
+            
+            errorMessage = "Password is too long, must be at most " + User.MAX_PASSWORD_LENGTH + " characters";
+            request.setAttribute("errorMessage", errorMessage);
+            request.getRequestDispatcher("WEB-INF/pages/registerform.jsp").forward(request, response);
+            return;
+        }
+        
+        if(newFirstName.length() >= User.MAX_FIRSTNAME_LENGTH){
+            
+            errorMessage = "First name is too long, must be at most " + User.MAX_FIRSTNAME_LENGTH + " characters";
+            request.setAttribute("errorMessage", errorMessage);
+            request.getRequestDispatcher("WEB-INF/pages/registerform.jsp").forward(request, response);
+            return;
+        }
+        
+        if(newLastName.length() >= User.MAX_LASTNAME_LENGTH){
+            
+            errorMessage = "Last name is too long, must be at most " + User.MAX_LASTNAME_LENGTH + " characters";
+            request.setAttribute("errorMessage", errorMessage);
+            request.getRequestDispatcher("WEB-INF/pages/registerform.jsp").forward(request, response);
+            return;
+        }
+        
+        
+        // Checking confirmation password is identical to first one
+        if (!newPassword.equals(newPasswordConfirm)) {
+            errorMessage = "Passwords must be the same!";
+            request.setAttribute("errorMessage", errorMessage);
+            request.getRequestDispatcher("WEB-INF/pages/registerform.jsp").forward(request, response);
+            return;
+        }
+        
+        // Creating user object from provided fields        
+        User user = new User(newUserName, newPassword, newFirstName, newLastName);
 
-            if (um.addNewUser(user)) {
-                registered = "You have successfully registered";
-                request.getSession().setAttribute("message", registered);
-                //request.setAttribute("registered", registered);
-                response.sendRedirect("login");
-            } else {
-                message = "Username already exists!";
-                request.setAttribute("message", message);
-                request.getRequestDispatcher("WEB-INF/pages/registerform.jsp").forward(request, response);
-            }
+        // Trying to add a user if the username doesnt exist, returning error if exists
+        if (um.addNewUser(user)) {
+            String registered = "You have successfully registered";
+            request.getSession().setAttribute("errorMessage", "You have successfully registered");
+
+            response.sendRedirect("login");
+        } else {
+            errorMessage = "Username already exists!";
+            request.setAttribute("errorMessage", errorMessage);
+            request.getRequestDispatcher("WEB-INF/pages/registerform.jsp").forward(request, response);
+        }
+        
+        
     }
 
     /**
@@ -82,7 +131,7 @@ public class RegisterServlet extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Servlet handling the register page";
     }
 
 }

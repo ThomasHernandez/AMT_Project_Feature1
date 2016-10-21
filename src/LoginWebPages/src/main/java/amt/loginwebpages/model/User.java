@@ -10,6 +10,13 @@ public class User {
     private String password;
     private String firstName;
     private String lastName;
+    
+    
+    // Based on database fields length
+    public static final int MAX_USERNAME_LENGTH = 20;
+    public static final int MAX_PASSWORD_LENGTH = 20;
+    public static final int MAX_FIRSTNAME_LENGTH = 50;
+    public static final int MAX_LASTNAME_LENGTH = 50;
 
     /**
      *

@@ -120,16 +120,16 @@
                                 
                             </h2>
                             
-                            <c:if test="${requestScope.message != null}">
+                            <c:if test="${requestScope.errorMessage != null}">
                                 <div class="alert alert-danger fade in">
                                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                    <strong>ERROR: </strong> ${requestScope.message}
+                                    <strong>ERROR: </strong> ${requestScope.errorMessage}
                                 </div>
                             </c:if>
-                            <c:if test="${sessionScope.message != null}">
+                            <c:if test="${sessionScope.errorMessage != null}">
                                 <div class="alert alert-success fade in">
                                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                    <strong>SUCCESS: </strong> ${sessionScope.message}
+                                    <strong>SUCCESS: </strong> ${sessionScope.errorMessage}
                                 </div>
                             </c:if>
 
