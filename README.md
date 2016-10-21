@@ -1,4 +1,4 @@
-# AMT_Project_Feature1 - CIANI Antony, HERNANDEZ Thomas
+# AMT\_Project\_Feature1 - CIANI Antony, HERNANDEZ Thomas
 
 
 ## Description
@@ -45,7 +45,13 @@ To access the main application go to:
 
 ## Database
 
-//TODO
+The database contains a single table to store our users informations composed by the following fields:
+
+	user_id int(15) NOT NULL AUTO_INCREMENT,
+	user_username VARCHAR(20) UNIQUE NOT NULL,
+	user_password VARCHAR(20) NOT NULL,
+	user_first_name VARCHAR(50) NOT NULL,
+    user_last_name VARCHAR(50) NOT NULL,
 
 
 
@@ -56,6 +62,16 @@ Login page: [http://192.168.99.100:9090/amt/login](http://192.168.99.100:9090/am
 Register page: [http://192.168.99.100:9090/amt/register](http://192.168.99.100:9090/amt/register)
 
 Protected page (only accessible when logged in) : [http://192.168.99.100:9090/amt/protected](http://192.168.99.100:9090/amt/protected)
+
+## Postman Script
+
+To use the provided Postman collection, import **AMT\_Project1.postman\_collection.json** from the **postman** directory into your Postman app.
+
+Either use your own environment by setting the variables "ip" and "port" where "ip" is the IP Address of the wilfly docker container and "port" the port it is listening on.
+
+Or you can simply import the provided Postman environment by importing **AMT\_WildflyServerDocker.postman\_environment.json** from the **postman** directory
+
+The collection provides 5 requests to test all the different REST calls you can do with our REST API.
 
 
 
