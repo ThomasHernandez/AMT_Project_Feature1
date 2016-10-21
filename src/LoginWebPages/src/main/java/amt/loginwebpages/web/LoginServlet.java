@@ -55,7 +55,7 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         
         //LoginManager lm = (LoginManager) request.getAttribute("loginManager");
-        HttpServletResponse resp = (HttpServletResponse)response;
+        //HttpServletResponse resp = (HttpServletResponse)response;
         String message;
 
         
@@ -68,7 +68,7 @@ public class LoginServlet extends HttpServlet {
             //response.sendRedirect(request.getServletContext().getContextPath() + "/");
             //request.getRequestDispatcher("/protected").forward(request, response);
             //request.getRequestDispatcher("WEB-INF/pages/protectedPage.jsp").forward(request, response);
-            resp.sendRedirect("/amt/protected");
+            response.sendRedirect("protected");
         }
         else{ 
             message = "Bad login";

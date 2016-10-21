@@ -45,7 +45,7 @@ public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        HttpServletResponse resp = (HttpServletResponse)response;
+        //HttpServletResponse resp = (HttpServletResponse)response;
         String message;
         String registered;
         
@@ -67,7 +67,7 @@ public class RegisterServlet extends HttpServlet {
                 registered = "You have successfully registered";
                 request.getSession().setAttribute("message", registered);
                 //request.setAttribute("registered", registered);
-                resp.sendRedirect("/amt/login");
+                response.sendRedirect("login");
             } else {
                 message = "Username already exists!";
                 request.setAttribute("message", message);

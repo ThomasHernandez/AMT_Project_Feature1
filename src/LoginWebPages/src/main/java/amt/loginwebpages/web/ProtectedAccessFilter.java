@@ -46,20 +46,20 @@ public class ProtectedAccessFilter implements Filter {
         String path = hsr.getRequestURI().substring(hsr.getContextPath().length());
         
         if(path.contentEquals("/")) {
-            resp.sendRedirect("/amt/home");
+            resp.sendRedirect("home");
             return;
         }
         
         if (hsr.getSession().getAttribute("user") != null) {
-            if (path.contentEquals("/login")) {
-                resp.sendRedirect("/amt/protected");
+            if (path.contentEquals("/login") || path.contentEquals("/register")) {
+                resp.sendRedirect("protected");
             }
             else {
                 chain.doFilter(request, response);
             }
         }
         else if (path.contentEquals("/protected")) {
-            resp.sendRedirect("/amt/login");
+            resp.sendRedirect("home");
         }
         else {
             chain.doFilter(request, response);
