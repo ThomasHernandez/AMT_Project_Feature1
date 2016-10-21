@@ -52,7 +52,7 @@ public class User {
      *
      * @return
      */
-    public String getFirstName() {
+    public String getFirstname() {
         return firstName;
     }
     
@@ -60,7 +60,7 @@ public class User {
      *
      * @return
      */
-    public String getLastName() {
+    public String getLastname() {
         return lastName;
     }
 
@@ -76,7 +76,7 @@ public class User {
      *
      * @param firstName
      */
-    public void setFirstName(String firstName) {
+    public void setFirstname(String firstName) {
         this.firstName = firstName;
     }
 
@@ -84,7 +84,7 @@ public class User {
      *
      * @param lastName
      */
-    public void setLastName(String lastName) {
+    public void setLastname(String lastName) {
         this.lastName = lastName;
     }
 

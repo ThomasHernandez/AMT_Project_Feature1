@@ -51,7 +51,7 @@ public class UserResource {
     public List<UserDTONoPsw> getUsers(@QueryParam(value = "byName") String byName) {
         List<User> users = um.findAllUsers();
         return users.stream()
-                .filter(p -> byName == null || p.getLastName().equalsIgnoreCase(byName))
+                .filter(p -> byName == null || p.getLastname().equalsIgnoreCase(byName))
                 .map(p -> toUserDTO(p))
                 .collect(toList());
 
@@ -68,7 +68,7 @@ public class UserResource {
         User user = fromUserDTO(userDTO);
 
         // Checking if all fields are provided
-        if(user.getUsername().isEmpty() || user.getPassword().isEmpty() || user.getFirstName().isEmpty() || user.getLastName().isEmpty()){
+        if(user.getUsername().isEmpty() || user.getPassword().isEmpty() || user.getFirstname().isEmpty() || user.getLastname().isEmpty()){
             
             return Response
                 .notModified("All fields must be non empty!")
@@ -92,14 +92,14 @@ public class UserResource {
                 .build();
         }
         
-        if(user.getFirstName().length() >= User.MAX_FIRSTNAME_LENGTH){
+        if(user.getFirstname().length() >= User.MAX_FIRSTNAME_LENGTH){
             
             return Response
                 .notModified("First name is too long, must be at most " + User.MAX_FIRSTNAME_LENGTH + " characters")
                 .build();
         }
         
-        if(user.getLastName().length() >= User.MAX_LASTNAME_LENGTH){
+        if(user.getLastname().length() >= User.MAX_LASTNAME_LENGTH){
             
             
             return Response
@@ -147,14 +147,14 @@ public class UserResource {
                .build();
        }
 
-       if(dto.getFirstName().length() >= User.MAX_FIRSTNAME_LENGTH){
+       if(dto.getFirstname().length() >= User.MAX_FIRSTNAME_LENGTH){
 
            return Response
                .notModified("First name is too long, must be at most " + User.MAX_FIRSTNAME_LENGTH + " characters")
                .build();
        }
 
-       if(dto.getLastName().length() >= User.MAX_LASTNAME_LENGTH){
+       if(dto.getLastname().length() >= User.MAX_LASTNAME_LENGTH){
 
 
            return Response
@@ -166,8 +166,8 @@ public class UserResource {
        User user = um.findUser(id);
 
        if(user != null){
-           user.setFirstName(dto.getFirstName());
-           user.setLastName(dto.getLastName());
+           user.setFirstname(dto.getFirstname());
+           user.setLastname(dto.getLastname());
            user.setPassword(dto.getPassword());
            um.updateUser(user);
            return Response
@@ -245,7 +245,7 @@ public class UserResource {
      */
     public UserDTONoPsw toUserDTO(User user) {
         
-        return new UserDTONoPsw(user.getUsername(), user.getFirstName(), user.getLastName());
+        return new UserDTONoPsw(user.getUsername(), user.getFirstname(), user.getLastname());
     }
     
 

@@ -41,7 +41,7 @@ public class UserDTONoPsw {
      *
      * @return
      */
-    public String getFirstName() {
+    public String getFirstname() {
         return firstName;
     }
     
@@ -49,7 +49,7 @@ public class UserDTONoPsw {
      *
      * @return
      */
-    public String getLastName() {
+    public String getLastname() {
         return lastName;
     }
    

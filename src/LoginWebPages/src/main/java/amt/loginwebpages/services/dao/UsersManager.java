@@ -108,13 +108,13 @@ public class UsersManager implements UsersManagerLocal {
                 pstmt.executeUpdate();
             }
             // Updating if change in first name
-            if(!userToUpdate.getFirstName().isEmpty()){
-                PreparedStatement pstmt = connection.prepareStatement("UPDATE user SET user_first_name = \""+ userToUpdate.getFirstName() +"\" WHERE user_username = \"" + userToUpdate.getUsername() + "\"");
+            if(!userToUpdate.getFirstname().isEmpty()){
+                PreparedStatement pstmt = connection.prepareStatement("UPDATE user SET user_first_name = \""+ userToUpdate.getFirstname() +"\" WHERE user_username = \"" + userToUpdate.getUsername() + "\"");
                 pstmt.executeUpdate();
             }
             // Updating if change in last name
-            if(!userToUpdate.getLastName().isEmpty()){
-                PreparedStatement pstmt = connection.prepareStatement("UPDATE user SET user_last_name = \""+ userToUpdate.getLastName() +"\" WHERE user_username = \"" + userToUpdate.getUsername() + "\"");
+            if(!userToUpdate.getLastname().isEmpty()){
+                PreparedStatement pstmt = connection.prepareStatement("UPDATE user SET user_last_name = \""+ userToUpdate.getLastname() +"\" WHERE user_username = \"" + userToUpdate.getUsername() + "\"");
                 pstmt.executeUpdate();
                 
             }
@@ -137,10 +137,10 @@ public class UsersManager implements UsersManagerLocal {
                 try {
                 Connection connection = dataSource.getConnection();
                 System.out.println("INSERT INTO user VALUES (NULL, \"" + user.getUsername() + "\", \"" + user.getPassword() + "\", "
-                        + "\"" + user.getFirstName() + "\", \"" + user.getLastName() + "\") ");
+                        + "\"" + user.getFirstname() + "\", \"" + user.getLastname() + "\") ");
                 
                 PreparedStatement pstmt = connection.prepareStatement("INSERT INTO user VALUES (NULL, \"" + user.getUsername() + "\", \"" + user.getPassword() + "\", "
-                        + "\"" + user.getFirstName() + "\", \"" + user.getLastName() + "\")");
+                        + "\"" + user.getFirstname() + "\", \"" + user.getLastname() + "\")");
                 
                 pstmt.executeUpdate();
                 connection.close();
