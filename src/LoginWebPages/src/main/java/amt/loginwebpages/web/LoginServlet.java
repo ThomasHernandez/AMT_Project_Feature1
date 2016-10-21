@@ -64,7 +64,7 @@ public class LoginServlet extends HttpServlet {
         if(username.isEmpty() || password.isEmpty()){
             errorMessage = "All fields must be provided!";
             request.setAttribute("errorMessage", errorMessage);
-            request.getRequestDispatcher("WEB-INF/pages/registerform.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/pages/loginform.jsp").forward(request, response);
             return;
             
         }
@@ -75,7 +75,7 @@ public class LoginServlet extends HttpServlet {
             
             errorMessage = "Username is too long, must be at most " + User.MAX_USERNAME_LENGTH + " characters";
             request.setAttribute("errorMessage", errorMessage);
-            request.getRequestDispatcher("WEB-INF/pages/registerform.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/pages/loginform.jsp").forward(request, response);
             return;
         }
         
@@ -83,7 +83,7 @@ public class LoginServlet extends HttpServlet {
             
             errorMessage = "Password is too long, must be at most " + User.MAX_PASSWORD_LENGTH + " characters";
             request.setAttribute("errorMessage", errorMessage);
-            request.getRequestDispatcher("WEB-INF/pages/registerform.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/pages/loginform.jsp").forward(request, response);
             return;
         }
         

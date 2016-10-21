@@ -1,5 +1,5 @@
 FROM phpmyadmin/phpmyadmin:latest
 
-MAINTAINER Olivier Liechti <olivier.liechti@heig-vd.ch>
+MAINTAINER Antony Ciani <antony.ciani@heig-vd.ch>
 
 
