@@ -2,7 +2,9 @@ package amt.loginwebpages.model;
 
 /**
  *
- * @author Antony Ciani
+ * This class implements the definition of a user
+ * 
+ * @author Antony Ciani & Thomas Hernandez
  */
 public class User {
     
@@ -34,7 +36,7 @@ public class User {
 
     /**
      *
-     * @return
+     * @return username
      */
     public String getUsername() {
         return userName;
@@ -42,7 +44,7 @@ public class User {
 
     /**
      *
-     * @return
+     * @return password
      */
     public String getPassword() {
         return password;
@@ -50,7 +52,7 @@ public class User {
 
     /**
      *
-     * @return
+     * @return firstname
      */
     public String getFirstname() {
         return firstName;
@@ -58,7 +60,7 @@ public class User {
     
     /**
      *
-     * @return
+     * @return lastname
      */
     public String getLastname() {
         return lastName;

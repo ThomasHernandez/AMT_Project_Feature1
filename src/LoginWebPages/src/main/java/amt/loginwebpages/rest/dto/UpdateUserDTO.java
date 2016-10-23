@@ -1,8 +1,12 @@
 package amt.loginwebpages.rest.dto;
 
 /**
- *
- * @author Thomas Hernandez
+ * 
+ * This DTO allows an update on a user. Therefore,
+ * it does not contains the username since this one
+ * is what defines the user and thus cannot be updated.
+ * 
+ * @author Antony Ciani & Thomas Hernandez
  */
 public class UpdateUserDTO {
     
@@ -10,16 +14,14 @@ public class UpdateUserDTO {
     private String lastName;
     private String password;
 
-    /**
-     *
-     */
+
     public UpdateUserDTO(){
 
     } 
 
     /**
      *
-     * @return
+     * @return firstname
      */
     public String getFirstname() { 
         return firstName; 
@@ -27,7 +29,7 @@ public class UpdateUserDTO {
 
     /**
      *
-     * @return
+     * @return lastname
      */
     public String getLastname() { 
         return lastName; 
@@ -35,7 +37,7 @@ public class UpdateUserDTO {
 
     /**
      *
-     * @return
+     * @return password
      */
     public String getPassword() {
         return password;

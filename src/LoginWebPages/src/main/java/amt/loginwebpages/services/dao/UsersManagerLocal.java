@@ -19,12 +19,12 @@ public interface UsersManagerLocal {
      * Returns a User object with the specified username
      *
      * @param userName
-     * @return User object if found null otherwise
+     * @return User object if found, null otherwise
      */
     public User findUser(String userName);
  
     /**
-     *  Returns all the User in the database
+     *  Returns all the Users in the database
      * 
      * @return List of all users in the database
      */
@@ -53,7 +53,7 @@ public interface UsersManagerLocal {
     public boolean addNewUser(User user);
 
     /**
-     * Check the validity of pair username,password to allow simple authentication
+     * Check the validity of pair username-password to allow simple authentication
      * 
      * @param user
      * @param testPassword

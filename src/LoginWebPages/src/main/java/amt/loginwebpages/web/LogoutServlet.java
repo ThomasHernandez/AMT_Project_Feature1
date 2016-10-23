@@ -7,13 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *  
- * This servlet handle the doGet methode in order to load
- * the web main page.
- * 
+ *
+ * This servlet logout a user and stop his session.
+ *
  * @author Antony Ciani & Thomas Hernandez
  */
-public class HomeServlet extends HttpServlet {
+public class LogoutServlet extends HttpServlet {
 
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -26,8 +25,10 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        request.getRequestDispatcher("/WEB-INF/pages/index.jsp").forward(request, response);
+
+        request.getSession().setAttribute("user", null);
+        response.sendRedirect("login");
+
     }
 
 }

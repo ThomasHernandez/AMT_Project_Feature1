@@ -7,14 +7,17 @@ import javax.ws.rs.core.Application;
 
 /**
  *
- * @author Thomas Hernandez
+ * This class implements the configuration of the REST api
+ * and defines its path as '/api'
+ * 
+ * @author Antony Ciani & Thomas Hernandez
  */
 @ApplicationPath("/api")
 public class RESTApplication extends Application{
     
     /**
      *
-     * @return
+     * @return properties - the desired configuration
      */
     @Override
     public Map<String, Object> getProperties() {

@@ -11,14 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Antony Ciani
+ * This servlet is in charge of the login page
+ *
+ * @author Antony Ciani & Thomas Hernandez
  */
 public class LoginServlet extends HttpServlet {
-    
+
     @EJB
     private UsersManagerLocal um;
-    
-
 
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -31,19 +31,21 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         response.setContentType("text/html;charset=UTF-8");
-        //request.setAttribute("users", lm.findAllUsers());
-        //request.getRequestDispatcher("WEB-INF/pages/users.jsp").forward(request, response);
-        
-        
+        if(request.getSession().getAttribute("message") != null) {
+            request.setAttribute("errorMessage", "test");
+            request.getSession().setAttribute("message", null);
+        }
         request.getRequestDispatcher("WEB-INF/pages/loginform.jsp").forward(request, response);
-        request.getSession().setAttribute("message", null);
-       
-   
+        //request.getSession().setAttribute("message", null);
+
     }
 
     /**
      * Handles the HTTP <code>POST</code> method.
+     * It also authenticates a user, creates his session 
+     * and display the corresponding error mesage if needed.
      *
      * @param request servlet request
      * @param response servlet response
@@ -53,68 +55,53 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String errorMessage;
 
-        
+        String errorMessage;
         String username = request.getParameter("userName");
         String password = request.getParameter("userPassword");
-        
+
         // Checking all fields are set
-        if(username.isEmpty() || password.isEmpty()){
+        if (username.isEmpty() || password.isEmpty()) {
             errorMessage = "All fields must be provided!";
             request.setAttribute("errorMessage", errorMessage);
             request.getRequestDispatcher("WEB-INF/pages/loginform.jsp").forward(request, response);
             return;
-            
+
         }
-        
+
         // Checking fields lengths to match database fields
-        
-        if(username.length() >= User.MAX_USERNAME_LENGTH){
-            
+        if (username.length() >= User.MAX_USERNAME_LENGTH) {
+
             errorMessage = "Username is too long, must be at most " + User.MAX_USERNAME_LENGTH + " characters";
             request.setAttribute("errorMessage", errorMessage);
             request.getRequestDispatcher("WEB-INF/pages/loginform.jsp").forward(request, response);
             return;
         }
-        
-        if(password.length() >= User.MAX_PASSWORD_LENGTH){
-            
+
+        if (password.length() >= User.MAX_PASSWORD_LENGTH) {
+
             errorMessage = "Password is too long, must be at most " + User.MAX_PASSWORD_LENGTH + " characters";
             request.setAttribute("errorMessage", errorMessage);
             request.getRequestDispatcher("WEB-INF/pages/loginform.jsp").forward(request, response);
             return;
         }
-        
-        
+
         User user = um.findUser(username);
-        
-        if(user != null && um.isValidCredentials(user, password)){
-            
+
+        // Check if the password matches the username.
+        if (user != null && um.isValidCredentials(user, password)) {
+
             request.getSession().setAttribute("user", user);
             response.sendRedirect("protected");
-            
-        }
-        else{ 
-            
+
+        } else {
+
             errorMessage = "Bad login";
             request.setAttribute("errorMessage", errorMessage);
             request.getRequestDispatcher("WEB-INF/pages/loginform.jsp").forward(request, response);
-            
-        }    
-        
-        
-    }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+        }
+
+    }
 
 }

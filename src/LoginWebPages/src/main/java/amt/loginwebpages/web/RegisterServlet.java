@@ -11,6 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
+ * This servlet is in charge of the register page.
+ * It performs multiples tests on the user inputs
+ * and display the corresponding error message if needed.
+ * If all the fields pass the tests, it creates a new user
+ * and adds him in the database.
+ * 
  * @author Thomas Hernandez
  * @author Antony Ciani
  */
@@ -47,6 +53,7 @@ public class RegisterServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String errorMessage;
+        String registered;
                 
         String newFirstName = request.getParameter("firstName");
         String newLastName = request.getParameter("lastName");
@@ -111,10 +118,10 @@ public class RegisterServlet extends HttpServlet {
 
         // Trying to add a user if the username doesnt exist, returning error if exists
         if (um.addNewUser(user)) {
-            String registered = "You have successfully registered";
-            request.getSession().setAttribute("errorMessage", "You have successfully registered");
-
+            //registered = "You have successfully registered";
+            request.getSession().setAttribute("message", "yop");
             response.sendRedirect("login");
+            
         } else {
             errorMessage = "Username already exists!";
             request.setAttribute("errorMessage", errorMessage);
@@ -124,14 +131,5 @@ public class RegisterServlet extends HttpServlet {
         
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Servlet handling the register page";
-    }
 
 }

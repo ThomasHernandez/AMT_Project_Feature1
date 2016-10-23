@@ -25,12 +25,10 @@ import javax.ws.rs.core.Response.Status;
 
 /**
  *
- * @author Thomas Hernandez
- * @author Antony Ciani
+ * The definition of the REST api for the users
+ * 
+ * @author Antony Ciani & Thomas Hernandez
  */
-
-
-
 @Stateless
 @Path("/users")
 public class UserResource {
@@ -43,15 +41,17 @@ public class UserResource {
 
     /**
      *
-     * @param byName
-     * @return
+     * GET all registered users.
+     * 
+     * @param byName - the username
+     * @return the list of all users
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<UserDTONoPsw> getUsers(@QueryParam(value = "byName") String byName) {
         List<User> users = um.findAllUsers();
         return users.stream()
-                .filter(p -> byName == null || p.getLastname().equalsIgnoreCase(byName))
+                .filter(p -> byName == null || p.getUsername().equalsIgnoreCase(byName))
                 .map(p -> toUserDTO(p))
                 .collect(toList());
 
@@ -59,8 +59,11 @@ public class UserResource {
 
     /**
      *
+     * The POST methode in order to create a new user.
+     * 
+     * 
      * @param userDTO
-     * @return
+     * @return Response - a reponse with the uri of a user and status
      */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -76,7 +79,7 @@ public class UserResource {
   
         }
         
-        // Checking fields lengths to match database fields
+        // Checking fields lengths to match database fields  
         
         if(user.getUsername().length() >= User.MAX_USERNAME_LENGTH){
 
@@ -129,9 +132,11 @@ public class UserResource {
     
     /**
      *
-     * @param id
-     * @param dto
-     * @return
+     * The PUT methode in order to update a user.
+     * 
+     * @param id - user id
+     * @param dto - users infos, password not included
+     * @return Responde - a response with the corresponding status
      */
     @Path("{id}")
     @PUT
@@ -139,7 +144,6 @@ public class UserResource {
     public Response updateInfoUser(@PathParam(value = "id") String id, UpdateUserDTO dto){
         
        // Checking fields lengths to match database fields
-
        if(dto.getPassword().length() >= User.MAX_PASSWORD_LENGTH){
 
            return Response
@@ -185,8 +189,10 @@ public class UserResource {
 
     /**
      *
-     * @param id
-     * @return
+     * The GET methode on 1 user
+     * 
+     * @param id - user id
+     * @return Response - a response with the corresponding status
      */
     @Path("{id}")
     @GET
@@ -203,11 +209,11 @@ public class UserResource {
         }
         
     }
-    
+  
     /**
-     *
-     * @param id
-     * @return
+     * DELETE the desired user.
+     * @param id - user id
+     * @return Response - a response with the corresponding status
      */
     @Path("{id}")
     @DELETE
@@ -230,8 +236,10 @@ public class UserResource {
 
     /**
      *
-     * @param dto
-     * @return
+     * This methode converts the DTO to a user (POST methode)
+     * 
+     * @param dto - user DTO
+     * @return User - the new user
      */
     public User fromUserDTO(UserDTO dto) {
 
@@ -240,8 +248,10 @@ public class UserResource {
 
     /**
      *
+     * This methode converts a user to a DTO (GET methode)
+     * 
      * @param user
-     * @return
+     * @return UserDTONoPsw - user DTO, password not included.
      */
     public UserDTONoPsw toUserDTO(User user) {
         

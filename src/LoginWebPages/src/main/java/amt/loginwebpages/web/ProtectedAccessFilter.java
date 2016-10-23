@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
+ * This filter blocks the acces to the protected page if
+ * a user is not authenticated.
+ * 
  * @author Antony Ciani
  * @author Thomas Hernandez
  */
@@ -40,16 +43,18 @@ public class ProtectedAccessFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
+        
         request.setCharacterEncoding("UTF-8");
         HttpServletRequest hsr = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse)response;
         String path = hsr.getRequestURI().substring(hsr.getContextPath().length());
         
+        // Load the main page when the web application starts
         if(path.contentEquals("/")) {
             resp.sendRedirect("home");
             return;
         }
-        
+        // allows a user to acces the protected page
         if (hsr.getSession().getAttribute("user") != null) {
             if (path.contentEquals("/login") || path.contentEquals("/register")) {
                 resp.sendRedirect("protected");

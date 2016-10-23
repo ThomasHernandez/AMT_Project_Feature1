@@ -8,22 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Thomas Hernandez
+ * This Servlet is in charge of the protected page
+ * and simply loads it.
+ * 
+ * @author Antony Ciani & Thomas Hernandez
  */
 public class ProtectedServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -40,11 +31,14 @@ public class ProtectedServlet extends HttpServlet {
     }
 
     /**
+     * Handles the HTTP <code>POST</code> method.
+     * It also authenticates a user, creates his session 
+     * and display the corresponding error mesage if needed.
      *
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -52,14 +46,6 @@ public class ProtectedServlet extends HttpServlet {
         
         request.getRequestDispatcher("WEB-INF/pages/protectedPage.jsp").forward(request, response);
     }
-    
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }
+
 
 }

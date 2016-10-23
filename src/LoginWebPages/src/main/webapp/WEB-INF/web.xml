@@ -14,7 +14,7 @@
     </servlet>
     <servlet>
         <servlet-name>Logout</servlet-name>
-        <servlet-class>amt.loginwebpages.web.Logout</servlet-class>
+        <servlet-class>amt.loginwebpages.web.LogoutServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>HomeServlet</servlet-name>

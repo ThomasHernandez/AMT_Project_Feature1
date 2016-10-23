@@ -2,7 +2,10 @@ package amt.loginwebpages.rest.dto;
 
 /**
  *
- * @author Thomas Hernandez
+ * This DTO is used when a POST request is needed. It contains
+ * every field that defines a user, password included.
+ * 
+ * @author Antony Ciani & Thomas Hernandez
  */
 public class UserDTO {
     
@@ -33,7 +36,7 @@ public class UserDTO {
 
     /**
      *
-     * @return
+     * @return username
      */
     public String getUsername() {
         return userName;
@@ -41,7 +44,7 @@ public class UserDTO {
     
     /**
      *
-     * @return
+     * @return firstname
      */
     public String getFirstname() {
         return firstName;
@@ -49,7 +52,7 @@ public class UserDTO {
     
     /**
      *
-     * @return
+     * @return lastname
      */
     public String getLastname() {
         return lastName;
@@ -57,7 +60,7 @@ public class UserDTO {
     
     /**
      *
-     * @return
+     * @return password
      */
     public String getPassword() {
         return password;
