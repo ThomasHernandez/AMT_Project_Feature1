@@ -129,9 +129,6 @@ public class UsersManager implements UsersManagerLocal {
 
             try {
                 Connection connection = dataSource.getConnection();
-                System.out.println("INSERT INTO user VALUES (NULL, \"" + user.getUsername() + "\", \"" + user.getPassword() + "\", "
-                        + "\"" + user.getFirstname() + "\", \"" + user.getLastname() + "\") ");
-
                 PreparedStatement pstmt = connection.prepareStatement("INSERT INTO user VALUES (NULL, \"" + user.getUsername() + "\", \"" + user.getPassword() + "\", "
                         + "\"" + user.getFirstname() + "\", \"" + user.getLastname() + "\")");
 

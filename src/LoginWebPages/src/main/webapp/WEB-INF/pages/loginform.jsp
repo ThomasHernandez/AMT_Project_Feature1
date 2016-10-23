@@ -126,6 +126,12 @@
                                     <strong>ERROR: </strong> ${requestScope.errorMessage}
                                 </div>
                             </c:if>
+                            <c:if test="${sessionScope.message != null}">
+                                <div class="alert alert-success fade in">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong>SUCCESS: </strong> ${sessionScope.message}
+                                </div>
+                            </c:if>
                             
 
                         </div>

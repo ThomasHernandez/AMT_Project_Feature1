@@ -33,12 +33,8 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
 
         response.setContentType("text/html;charset=UTF-8");
-        if(request.getSession().getAttribute("message") != null) {
-            request.setAttribute("errorMessage", "test");
-            request.getSession().setAttribute("message", null);
-        }
         request.getRequestDispatcher("WEB-INF/pages/loginform.jsp").forward(request, response);
-        //request.getSession().setAttribute("message", null);
+        request.getSession().setAttribute("message", null); // works on localhost only :(
 
     }
 

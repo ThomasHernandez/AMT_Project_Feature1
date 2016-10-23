@@ -118,8 +118,8 @@ public class RegisterServlet extends HttpServlet {
 
         // Trying to add a user if the username doesnt exist, returning error if exists
         if (um.addNewUser(user)) {
-            //registered = "You have successfully registered";
-            request.getSession().setAttribute("message", "yop");
+            registered = "You have successfully registered";
+            request.getSession().setAttribute("message", registered);
             response.sendRedirect("login");
             
         } else {
