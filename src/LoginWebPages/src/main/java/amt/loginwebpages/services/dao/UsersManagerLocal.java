@@ -38,7 +38,7 @@ public interface UsersManagerLocal {
     public void deleteUser(String userName);
 
     /**
-     * Update the user with specified username's field with the non empty other fields
+     * Update the user with specified username's field, with the non empty other fields
      * 
      * @param user
      */
