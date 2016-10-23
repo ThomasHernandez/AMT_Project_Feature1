@@ -41,7 +41,72 @@ To access the main application go to:
 
 ## REST API
 
-//TODO
+The REST API can be used to administrate the users and provides the standard HTTP methods (GET, PUT, POST and DELETE)
+
+A bunch of requests are provided in the postman script in order to test the REST API.
+
+###Add new user
+
+Stores a new User in the database if the username does not already exist.
+
+	URL: POST /amt/api/users
+	Json body:
+	{
+		"username":"exequia",
+		"password":"psw123",
+		"firstname":"Tom",
+		"lastname":"Hernan"
+	}
+
+###Find all users
+
+Returns all the Users in the database and displays all the users' infos as a Json tab.
+
+	URL: GET /amt/api/users
+	Response (Json):
+	[
+	  {
+	    "firstname": "Thomas",
+	    "lastname": "Hernandez",
+	    "username": "Tom"
+	  },
+	  {
+	    "firstname": "Antony",
+	    "lastname": "Ciani",
+	    "username": "Tony"
+	  }
+	]
+
+###Find user
+
+Returns a User object with the specified username. In this example, let's assume that the username value is `tony`
+
+	URL: GET /amt/api/users/{username}
+	Response (Json): 
+	{
+	    "firstname": "Antony",
+	    "lastname": "Ciani",
+	    "username": "tony"
+	}
+
+###Update user
+
+Updates a specific user with specified non empty fields. If a field remains empty, it won't be updated. Note that the username can't be updated because this field defines the user and thus is final.
+
+	URL: PUT /amt/api/users/{username}
+	Json body:
+	{
+		"password": "toor"
+	    "firstname": "Antonini",
+	    "lastname": "Cianini"    
+	}
+
+###Delete user
+
+Deletes the user with the specified username.
+
+	URL: DELETE /amt/api/users/{username}
+
 
 ## Database
 
@@ -56,6 +121,8 @@ The database contains a single table to store our users informations composed by
 
 
 ## Sitemap
+
+Home page: [http://192.168.99.100:9090/amt/home](http://192.168.99.100:9090/amt/home)
 
 Login page: [http://192.168.99.100:9090/amt/login](http://192.168.99.100:9090/amt/login)
 
